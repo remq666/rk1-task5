@@ -1,0 +1,3058 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>РК-1 МГТУ им. Н.Э. Баумана — Задание №5 (Вариант №16)</title>
+  <style>
+    /* =========================================================================
+       БАЗОВЫЕ ТОКЕНЫ И ЗАЩИТА ОТ СКАЧИВАНИЯ (100% АВТОНОМНЫЙ CSS БЕЗ CDN)
+       ========================================================================= */
+    :root {
+      --bg: #f1f5f9;
+      --surface: #ffffff;
+      --surface-alt: #f8fafc;
+      --border: #cbd5e1;
+      --border-soft: #e2e8f0;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --primary-soft: #eff6ff;
+      --purple: #7c3aed;
+      --purple-soft: #f5f3ff;
+      --emerald: #059669;
+      --emerald-soft: #ecfdf5;
+      --amber: #d97706;
+      --amber-soft: #fffbeb;
+      --rose: #e11d48;
+      --rose-soft: #fff1f2;
+      --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+      --shadow-md: 0 6px 20px rgba(15, 23, 42, 0.08);
+      --radius: 12px;
+      --radius-sm: 8px;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-touch-callout: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100%;
+      overflow-x: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.4;
+    }
+
+    /* =========================================================================
+       ВЕРХНЯЯ ПАНЕЛЬ И ВКЛАДКИ (MOBILE-FIRST + DESKTOP)
+       ========================================================================= */
+    .app-shell {
+      width: 100%;
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 10px 10px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .topbar {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #f8fafc;
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .brand-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-sub {
+      font-size: 12px;
+      color: #cbd5e1;
+      margin-top: 2px;
+    }
+
+    .shield-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #e2e8f0;
+      white-space: nowrap;
+    }
+
+    .tabs-nav {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      background: var(--surface);
+      padding: 6px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .tab-btn {
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text-muted);
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 10px 8px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      text-align: center;
+      min-height: 42px;
+    }
+
+    .tab-btn:hover {
+      background: var(--surface-alt);
+      color: var(--text);
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 3px 10px rgba(37, 99, 235, 0.28);
+    }
+
+    .tab-panel {
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .tab-panel.active {
+      display: flex;
+    }
+
+    /* =========================================================================
+       КАРТОЧКИ И ПАНЕЛИ УПРАВЛЕНИЯ
+       ========================================================================= */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+
+    .toolbar {
+      padding: 10px 12px;
+      background: var(--surface-alt);
+      border-bottom: 1px solid var(--border-soft);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .toolbar-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .toolbar-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-right: 2px;
+    }
+
+    .check-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      min-height: 34px;
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    .check-pill:hover {
+      border-color: var(--primary);
+    }
+
+    .check-pill input {
+      accent-color: var(--primary);
+      width: 15px;
+      height: 15px;
+      margin: 0;
+      cursor: pointer;
+    }
+
+    .btn {
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 7px 11px;
+      min-height: 34px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    .btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .btn-purple.active {
+      background: var(--purple);
+      border-color: var(--purple);
+      color: #ffffff;
+    }
+
+    /* =========================================================================
+       ИНСПЕКТОР «🧭 ЦИРКУЛЬ РК-1»
+       ========================================================================= */
+    .compass-bar {
+      padding: 10px 12px;
+      background: linear-gradient(180deg, #faf5ff 0%, #ffffff 100%);
+      border-bottom: 1px solid #e9d5ff;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .compass-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .compass-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #5b21b6;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .compass-hint {
+      font-size: 11px;
+      color: #6d28d9;
+    }
+
+    .points-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .pt-btn {
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 9px;
+      min-height: 34px;
+      min-width: 44px;
+      border-radius: 7px;
+      border: 1px solid #d8b4fe;
+      background: #ffffff;
+      color: #4c1d95;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .pt-btn:hover {
+      background: #f3e8ff;
+      border-color: #9333ea;
+    }
+
+    .pt-btn.active {
+      background: #7c3aed;
+      border-color: #6d28d9;
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(124, 58, 237, 0.35);
+    }
+
+    .pt-btn.neutral {
+      border-color: var(--border);
+      color: var(--text-muted);
+    }
+
+    .pt-btn.neutral.active {
+      background: #334155;
+      border-color: #1e293b;
+      color: #ffffff;
+      box-shadow: none;
+    }
+
+    /* 3-шаговая карточка алгоритма построения выбранной точки */
+    .algo-card {
+      display: none;
+      margin: 0;
+      padding: 12px;
+      background: #ffffff;
+      border-bottom: 1px solid #ddd6fe;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .algo-card.visible {
+      display: block;
+    }
+
+    .algo-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .algo-pt-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: #1e1b4b;
+    }
+
+    .algo-coords {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #f5f3ff;
+      border: 1px solid #ddd6fe;
+      color: #5b21b6;
+    }
+
+    .algo-steps {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    .step-box {
+      border-radius: 9px;
+      padding: 9px 11px;
+      border: 1px solid var(--border-soft);
+      font-size: 12.5px;
+      line-height: 1.45;
+    }
+
+    .step-box.s1 {
+      background: #eff6ff;
+      border-color: #bfdbfe;
+    }
+
+    .step-box.s2 {
+      background: #f5f3ff;
+      border-color: #ddd6fe;
+    }
+
+    .step-box.s3 {
+      background: #ecfdf5;
+      border-color: #a7f3d0;
+    }
+
+    .step-tag {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-bottom: 3px;
+      display: block;
+    }
+
+    .step-box.s1 .step-tag { color: #1d4ed8; }
+    .step-box.s2 .step-tag { color: #6d28d9; }
+    .step-box.s3 .step-tag { color: #047857; }
+
+    /* =========================================================================
+       КОНТЕЙНЕРЫ ХОЛСТОВ (2D-ЭПЮР И 3D CAD)
+       ========================================================================= */
+    .canvas-stage {
+      position: relative;
+      width: 100%;
+      background: #ffffff;
+      touch-action: none;
+      overflow: hidden;
+    }
+
+    .stage-2d {
+      height: min(74vh, 760px);
+      min-height: 440px;
+    }
+
+    .stage-3d {
+      height: min(70vh, 660px);
+      min-height: 420px;
+      background: radial-gradient(circle at 50% 35%, #ffffff 0%, #eef2f6 100%);
+    }
+
+    .stage-3d.kompas-bg {
+      background: radial-gradient(circle at 50% 35%, #f8fafc 0%, #dbe4ee 100%);
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .canvas-overlay-hint {
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+      background: rgba(15, 23, 42, 0.72);
+      color: #f8fafc;
+      font-size: 11px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      pointer-events: none;
+      backdrop-filter: blur(4px);
+    }
+
+    .legend-strip {
+      padding: 8px 12px;
+      background: var(--surface-alt);
+      border-top: 1px solid var(--border-soft);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 600;
+    }
+
+    .swatch {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      border: 1px solid rgba(15, 23, 42, 0.25);
+      display: inline-block;
+    }
+
+    /* =========================================================================
+       ТАБЛИЦА КООРДИНАТ ОПОРНЫХ ТОЧЕК
+       ========================================================================= */
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    table.pt-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+      min-width: 680px;
+    }
+
+    table.pt-table th {
+      background: #f1f5f9;
+      color: #334155;
+      font-weight: 700;
+      text-align: left;
+      padding: 10px 10px;
+      border-bottom: 2px solid var(--border);
+      white-space: nowrap;
+    }
+
+    table.pt-table td {
+      padding: 9px 10px;
+      border-bottom: 1px solid var(--border-soft);
+      vertical-align: middle;
+    }
+
+    table.pt-table tbody tr {
+      cursor: pointer;
+      transition: background 0.14s ease;
+    }
+
+    table.pt-table tbody tr:hover {
+      background: #f5f3ff;
+    }
+
+    table.pt-table tbody tr.selected-row {
+      background: #ede9fe;
+    }
+
+    .mono {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .pt-pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #7c3aed;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 11.5px;
+    }
+
+    .action-link {
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 11.5px;
+      white-space: nowrap;
+    }
+
+    /* =========================================================================
+       ВСПЛЫВАЮЩЕЕ TOAST-УВЕДОМЛЕНИЕ (ЗАЩИТА ОТ СКАЧИВАНИЯ)
+       ========================================================================= */
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%) translateY(90px);
+      background: #0f172a;
+      color: #ffffff;
+      padding: 11px 18px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.35);
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+      max-width: calc(100vw - 24px);
+      text-align: center;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* =========================================================================
+       АДАПТИВНЫЕ БРЕЙКПОИНТЫ (TABLET / DESKTOP)
+       ========================================================================= */
+    @media (min-width: 768px) {
+      .app-shell {
+        padding: 14px 18px 28px;
+        gap: 12px;
+      }
+      .brand-title {
+        font-size: 18px;
+      }
+      .tab-btn {
+        font-size: 14px;
+        padding: 11px 14px;
+      }
+      .algo-steps {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .stage-2d {
+        height: min(76vh, 800px);
+      }
+      .stage-3d {
+        height: min(72vh, 700px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Шапка приложения -->
+    <header class="topbar">
+      <div>
+        <div class="brand-title">📐 Задание №5 · Вариант №16 (РК-1 МГТУ им. Н.Э. Баумана)</div>
+        <div class="brand-sub">Пятиугольная призма (Ø110, H=120) с конической полостью (Ø80) и сквозным вырезом «К»</div>
+      </div>
+      <div class="shield-badge">🔒 Защищенный просмотр · ГОСТ ЕСКД</div>
+    </header>
+
+    <!-- Навигация по вкладкам -->
+    <nav class="tabs-nav" role="tablist">
+      <button class="tab-btn active" data-tab="tab2d" role="tab">📐 2D-Эпюр и Циркуль РК-1</button>
+      <button class="tab-btn" data-tab="tab3d" role="tab">🧊 3D CAD-модель</button>
+      <button class="tab-btn" data-tab="tabTable" role="tab">📊 Таблица точек</button>
+    </nav>
+
+    <!-- =======================================================================
+         ВКЛАДКА 1: ЧИСТЫЙ 2D-ЭПЮР + ИНСПЕКТОР «🧭 ЦИРКУЛЬ РК-1»
+         ======================================================================= -->
+    <section id="tab2d" class="tab-panel active">
+      <div class="card">
+        <!-- Слои 2D-эпюра и масштабирование -->
+        <div class="toolbar">
+          <div class="toolbar-group">
+            <span class="toolbar-label">Слои ГОСТ:</span>
+            <label class="check-pill">
+              <input type="checkbox" id="chkLinks" checked />
+              Линии связи и 45°
+            </label>
+            <label class="check-pill">
+              <input type="checkbox" id="chkHidden" />
+              Штриховые линии
+            </label>
+            <label class="check-pill">
+              <input type="checkbox" id="chkDims" checked />
+              Размеры ГОСТ
+            </label>
+          </div>
+          <div class="toolbar-group">
+            <button class="btn" id="btn2dZoomOut" title="Уменьшить">➖</button>
+            <button class="btn" id="btn2dReset" title="Сбросить вид">100%</button>
+            <button class="btn" id="btn2dZoomIn" title="Увеличить">➕</button>
+          </div>
+        </div>
+
+        <!-- Инспектор «🧭 Циркуль РК-1» -->
+        <div class="compass-bar">
+          <div class="compass-header">
+            <div class="compass-title">🧭 Циркуль РК-1 (Откуда откладывать расстояния)</div>
+            <div class="compass-hint">Выберите кнопку ниже или нажмите на точку прямо на эпюре</div>
+          </div>
+          <div class="points-grid" id="compassButtons"></div>
+        </div>
+
+        <!-- 3-шаговая карточка алгоритма построения выбранной точки -->
+        <div class="algo-card" id="algoCard">
+          <div class="algo-head">
+            <div class="algo-pt-title" id="algoTitle"></div>
+            <div class="algo-coords" id="algoCoords"></div>
+          </div>
+          <div class="algo-steps">
+            <div class="step-box s1">
+              <span class="step-tag">Шаг 1 · На П2 (Главный вид)</span>
+              <div id="algoP2"></div>
+            </div>
+            <div class="step-box s2">
+              <span class="step-tag">Шаг 2 · На П1 (Вид сверху)</span>
+              <div id="algoP1"></div>
+            </div>
+            <div class="step-box s3">
+              <span class="step-tag">Шаг 3 · На П3 (Вид слева)</span>
+              <div id="algoP3"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Чистый белый HiDPI-холст 2D-эпюра (БЕЗ рамок и штампов!) -->
+        <div class="canvas-stage stage-2d" id="stage2d">
+          <canvas id="canvas2d"></canvas>
+          <div class="canvas-overlay-hint">Перетаскивание — панорама · Колесо/щипок — зум · Клик по точке — «Циркуль РК-1»</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         ВКЛАДКА 2: 100% АВТОНОМНЫЙ 3D B-REP SOLID CAD-ДВИЖОК
+         ======================================================================= -->
+    <section id="tab3d" class="tab-panel">
+      <div class="card">
+        <div class="toolbar">
+          <div class="toolbar-group">
+            <span class="toolbar-label">Разрез 3D:</span>
+            <button class="btn active" data-sec="full">Цельная деталь</button>
+            <button class="btn" data-sec="quarter">1/4 разрез (как П2)</button>
+            <button class="btn" data-sec="profile">Профильный (как П3)</button>
+            <button class="btn" data-sec="frontal">Фронтальный</button>
+          </div>
+          <div class="toolbar-group">
+            <span class="toolbar-label">Стиль:</span>
+            <button class="btn btn-purple active" data-style="edu">🎨 Учебный CAD</button>
+            <button class="btn btn-purple" data-style="kompas">⚙️ КОМПАС-3D</button>
+          </div>
+        </div>
+
+        <div class="toolbar" style="border-top: none;">
+          <div class="toolbar-group">
+            <span class="toolbar-label">Камера:</span>
+            <button class="btn" data-cam="iso">Изометрия</button>
+            <button class="btn" data-cam="p2">П2 Спереди</button>
+            <button class="btn" data-cam="p1">П1 Сверху</button>
+            <button class="btn" data-cam="p3">П3 Слева</button>
+          </div>
+          <div class="toolbar-group">
+            <label class="check-pill">
+              <input type="checkbox" id="chk3dAxes" checked />
+              Оси и точки
+            </label>
+            <button class="btn" id="btn3dZoomOut">➖</button>
+            <button class="btn" id="btn3dReset">Сброс</button>
+            <button class="btn" id="btn3dZoomIn">➕</button>
+          </div>
+        </div>
+
+        <div class="canvas-stage stage-3d" id="stage3d">
+          <canvas id="canvas3d"></canvas>
+          <div class="canvas-overlay-hint">Вращение — мышью или 1 пальцем · Масштаб — колесом / щипком / кнопками</div>
+        </div>
+
+        <div class="legend-strip" id="legend3d">
+          <span class="legend-item"><span class="swatch" style="background:#60a5fa"></span>Призма (Ø110, H=120)</span>
+          <span class="legend-item"><span class="swatch" style="background:#fbbf24"></span>Коническая полость (Ø80)</span>
+          <span class="legend-item"><span class="swatch" style="background:#34d399"></span>Стенки выреза «К»</span>
+          <span class="legend-item"><span class="swatch" style="background:#f87171"></span>Крышки разрезов (штриховка 45°)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         ВКЛАДКА 3: ТАБЛИЦА КООРДИНАТ ОПОРНЫХ ТОЧЕК
+         ======================================================================= -->
+    <section id="tabTable" class="tab-panel">
+      <div class="card">
+        <div class="toolbar">
+          <div class="toolbar-label" style="color: var(--text); font-size: 13px;">
+            📊 Сводная таблица 12 опорных точек (нажмите на любую строку для показа в «Циркуле РК-1»)
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="pt-table">
+            <thead>
+              <tr>
+                <th>Точка</th>
+                <th>Описание (геометрический смысл)</th>
+                <th>X, мм</th>
+                <th>Y, мм</th>
+                <th>Z, мм</th>
+                <th>Опорн. R (П1)</th>
+                <th>Раствор |Y|</th>
+                <th>Переход</th>
+              </tr>
+            </thead>
+            <tbody id="pointsTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Toast-уведомление защищенного режима -->
+  <div class="toast" id="toastBox">🔒 Режим защищенного просмотра: скачивание отключено автором</div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      /* =======================================================================
+         1. ЗАЩИТА ОТ СКАЧИВАНИЯ (VIEW-ONLY PROTECTION)
+         ======================================================================= */
+      const toastBox = document.getElementById('toastBox');
+      let toastTimer = null;
+      function showProtectedToast() {
+        toastBox.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toastBox.classList.remove('show'), 2400);
+      }
+
+      document.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        showProtectedToast();
+      });
+      document.addEventListener('dragstart', (e) => {
+        e.preventDefault();
+      });
+      document.addEventListener('keydown', (e) => {
+        const key = (e.key || '').toLowerCase();
+        if (
+          e.key === 'F12' ||
+          ((e.ctrlKey || e.metaKey) && (key === 's' || key === 'p' || key === 'u')) ||
+          ((e.ctrlKey || e.metaKey) && e.shiftKey && (key === 'i' || key === 'j' || key === 'c'))
+        ) {
+          e.preventDefault();
+          showProtectedToast();
+        }
+      });
+
+      /* =======================================================================
+         2. ТОЧНАЯ 3D-МАТЕМАТИКА ДЕТАЛИ (ПРАВАЯ ДЕКАРТОВА СИСТЕМА X, Y, Z)
+         ======================================================================= */
+      const DEG = Math.PI / 180;
+      const H = 120.0;
+      const R_PRISM = 55.0;       // Ø110 описанная окружность пятиугольника
+      const R_CONE_TOP = 40.0;    // Ø80 устье конуса на Z = 120
+      const Z_TOP = 95.0;         // 120 - 25
+      const Z_BOT = 35.0;         // 95 - 60
+      const X_K_TOP = 25.0;       // Половина ширины 50 мм
+      const K_SLOPE = X_K_TOP / Z_TOP; // 25/95 = 5/19
+      const X_K_BOT = Z_BOT * K_SLOPE; // 175/19 = 9.210526...
+      const TAN36 = Math.tan(36 * DEG); // 0.726542528...
+
+      // Радиус сечения конуса на высоте Z: r(Z) = Z / 3
+      const rCone = (Z) => Z / 3.0;
+      const R95 = rCone(Z_TOP);   // 31.666667
+      const R35 = rCone(Z_BOT);   // 11.666667
+
+      // 5 вершин правильного пятиугольника (V0 строго вниз: угол -90°)
+      const PENT = [];
+      for (let i = 0; i < 5; i++) {
+        const a = (-90 + i * 72) * DEG;
+        PENT.push({ x: R_PRISM * Math.cos(a), y: R_PRISM * Math.sin(a) });
+      }
+      // PENT[0] = (0, -55)
+      // PENT[1] = (+52.3081, -16.9959)
+      // PENT[2] = (+32.3282, +44.4959)
+      // PENT[3] = (-32.3282, +44.4959)
+      // PENT[4] = (-52.3081, -16.9959)
+      const Y_BACK = PENT[2].y;   // +44.495935
+      const X_V1 = PENT[1].x;     // +52.308115
+      const X_V2 = PENT[2].x;     // +32.328188
+
+      // Точное пересечение фронтальной плоскости Y = 0 с боковой гранью V1-V2
+      const tSec = (0 - PENT[1].y) / (PENT[2].y - PENT[1].y);
+      const X_SEC = PENT[1].x + tSec * (PENT[2].x - PENT[1].x); // +46.7858...
+
+      // Пересечение наклонных плоскостей «К» с конусом: |Y(Z)| = (2*sqrt(34)/57)*Z
+      const Y_CONE_SLOPE = Math.sqrt(1 / 9 - K_SLOPE * K_SLOPE); // 0.20459473...
+      const Y_K95_CONE = Y_CONE_SLOPE * Z_TOP; // 19.436506
+      const Y_K35_CONE = Y_CONE_SLOPE * Z_BOT; // 7.160818
+      const PHI0 = Math.atan2(Y_CONE_SLOPE, K_SLOPE); // 37.8617°
+
+      // Выход наклонных плоскостей «К» на переднюю грань V0-V1: Y = -55 + |X| * tan(36°)
+      const yFrontPrism = (absX) => -R_PRISM + absX * TAN36;
+      const Y_K95_FRONT = yFrontPrism(X_K_TOP); // -36.8364
+      const Y_K35_FRONT = yFrontPrism(X_K_BOT); // -48.3082
+
+      // Видимое продолжение ребра дна выреза «К» (X = ±9.211) на П1 до нависающей дуги r(95)
+      const Y_BOT_EDGE_VIS = Math.sqrt(R95 * R95 - X_K_BOT * X_K_BOT); // 30.2976
+
+      /* =======================================================================
+         3. ЕДИНАЯ КАНОНИЧЕСКАЯ БАЗА 12 ОПОРНЫХ ТОЧЕК KEY_POINTS_3D
+         ======================================================================= */
+      const KEY_POINTS_3D = [
+        {
+          id: 'Т.1',
+          num: 1,
+          name: 'Верхний угол «К» на конусе (передняя ветвь)',
+          X: +25.00,
+          Y: -Y_K95_CONE,
+          Z: 95.00,
+          rCircleP1: R95,
+          howP2: 'От оси X=0 отложить вправо 25,00 мм, от основания Z=0 вверх 95,00 мм — это правый верхний угол трапеции выреза «К».',
+          howP1: 'Провести циркулем опорную окружность конуса r(95)=31,67 мм. Опустить вертикаль с П2 (X=+25) до пересечения с передней полудугой (Y=−19,44 мм).',
+          howP3: 'Измерить циркулем от оси П1 вниз Y=19,44 мм и отложить на П3 ВПРАВО от оси (u=+19,44 мм) на высоте Z=95 мм — верхний конец передней наклонной.'
+        },
+        {
+          id: 'Т.2',
+          num: 2,
+          name: 'Верхний угол «К» на конусе (задняя ветвь)',
+          X: +25.00,
+          Y: +Y_K95_CONE,
+          Z: 95.00,
+          rCircleP1: R95,
+          howP2: 'Совпадает на П2 с Т.1 (X=+25,00 мм, Z=95,00 мм) — конкурирующая точка на задней стенке конуса.',
+          howP1: 'На той же опорной окружности r(95)=31,67 мм опустить вертикаль X=+25 до пересечения с задней (верхней) полудугой (Y=+19,44 мм).',
+          howP3: 'Циркулем взять Y=19,44 мм вверх от оси П1 и отложить на П3 ВЛЕВО от оси (u=−19,44 мм) на уровне Z=95 мм — верхний конец задней наклонной.'
+        },
+        {
+          id: 'Т.3',
+          num: 3,
+          name: 'Нижний угол «К» на конусе (передняя ветвь)',
+          X: +X_K_BOT,
+          Y: -Y_K35_CONE,
+          Z: 35.00,
+          rCircleP1: R35,
+          howP2: 'На высоте дна выреза Z=35,00 мм наклонная стенка «К» (идущая в (0,0)) даёт X=+9,21 мм вправо от оси.',
+          howP1: 'Провести малую опорную окружность конуса r(35)=11,67 мм. Опустить вертикаль X=+9,21 до передней полудуги (Y=−7,16 мм) — точка лежит на одной прямой с Т.1 и центром!',
+          howP3: 'Циркулем взять от оси П1 вниз Y=7,16 мм и отложить на П3 ВПРАВО от оси (u=+7,16 мм) на уровне Z=35 мм — нижний конец передней наклонной.'
+        },
+        {
+          id: 'Т.4',
+          num: 4,
+          name: 'Нижний угол «К» на конусе (задняя ветвь)',
+          X: +X_K_BOT,
+          Y: +Y_K35_CONE,
+          Z: 35.00,
+          rCircleP1: R35,
+          howP2: 'Совпадает на П2 с Т.3 (X=+9,21 мм, Z=35,00 мм) — задняя точка пересечения дна «К» с конусом.',
+          howP1: 'На малой окружности r(35)=11,67 мм пересечь вертикаль X=+9,21 с задней (верхней) полудугой (Y=+7,16 мм).',
+          howP3: 'Перенести циркулем Y=7,16 мм с П1 ВЛЕВО от вертикальной оси П3 (u=−7,16 мм) на высоту Z=35 мм — нижний конец задней наклонной.'
+        },
+        {
+          id: 'Т.5',
+          num: 5,
+          name: 'Выход верхнего угла «К» на переднюю грань призмы',
+          X: +25.00,
+          Y: Y_K95_FRONT,
+          Z: 95.00,
+          rCircleP1: 0,
+          howP2: 'Расположена в правом верхнем углу выреза «К»: X=+25,00 мм от оси, Z=95,00 мм от основания.',
+          howP1: 'Опустить вертикальную линию связи X=+25 до пересечения с передней правой гранью пятиугольника V0–V1. Измеряем Y=−36,84 мм от оси П1.',
+          howP3: 'Циркулем перенести Y=36,84 мм ВПРАВО от оси П3 (u=+36,84 мм) на уровень Z=95 мм — верхняя точка внешней наклонной врезки на передней грани!'
+        },
+        {
+          id: 'Т.6',
+          num: 6,
+          name: 'Выход нижнего угла «К» на переднюю грань призмы',
+          X: +X_K_BOT,
+          Y: Y_K35_FRONT,
+          Z: 35.00,
+          rCircleP1: 0,
+          howP2: 'Находится в правом нижнем углу трапеции «К»: X=+9,21 мм от оси, Z=35,00 мм от основания.',
+          howP1: 'Опустить вертикаль X=+9,21 до передней грани призмы V0–V1. Получаем расстояние от оси П1 вниз Y=−48,31 мм.',
+          howP3: 'Отложить циркулем Y=48,31 мм ВПРАВО от оси П3 (u=+48,31 мм) на высоте Z=35 мм и соединить прямой с Т.5 — внешняя наклонная линия в проёме.'
+        },
+        {
+          id: 'Т.7',
+          num: 7,
+          name: 'Передняя точка дуги конуса Z=95 в разрезе П3',
+          X: 0.00,
+          Y: -R95,
+          Z: 95.00,
+          rCircleP1: R95,
+          howP2: 'Лежит строго на оси симметрии X=0 на уровне верхней полки выреза Z=95,00 мм.',
+          howP1: 'Нижняя (передняя) точка опорной окружности конуса r(95)=31,67 мм на вертикальной оси (Y=−31,67 мм).',
+          howP3: 'Отложить r(95)=31,67 мм ВПРАВО от оси П3 (u=+31,67 мм) на высоте Z=95 мм — нижний угол правой верхней заштрихованной трапеции.'
+        },
+        {
+          id: 'Т.8',
+          num: 8,
+          name: 'Задняя точка дуги конуса Z=95 в разрезе П3',
+          X: 0.00,
+          Y: +R95,
+          Z: 95.00,
+          rCircleP1: R95,
+          howP2: 'Лежит на оси симметрии X=0 на уровне верхней полки выреза Z=95,00 мм.',
+          howP1: 'Верхняя (задняя) точка опорной окружности конуса r(95)=31,67 мм на вертикальной оси (Y=+31,67 мм).',
+          howP3: 'Отложить r(95)=31,67 мм ВЛЕВО от оси П3 (u=−31,67 мм) на высоте Z=95 мм — правый нижний угол левой верхней заштрихованной трапеции.'
+        },
+        {
+          id: 'Т.9',
+          num: 9,
+          name: 'Передняя точка дуги конуса Z=35 в разрезе П3',
+          X: 0.00,
+          Y: -R35,
+          Z: 35.00,
+          rCircleP1: R35,
+          howP2: 'Лежит на оси симметрии X=0 на уровне нижней полки выреза Z=35,00 мм.',
+          howP1: 'Нижняя (передняя) точка малой окружности конуса r(35)=11,67 мм на вертикальной оси (Y=−11,67 мм).',
+          howP3: 'Отложить r(35)=11,67 мм ВПРАВО от оси П3 (u=+11,67 мм) на высоте Z=35 мм — верхний левый угол нижней правой заштрихованной области.'
+        },
+        {
+          id: 'Т.10',
+          num: 10,
+          name: 'Верхний край выреза «К» на задней грани призмы',
+          X: 0.00,
+          Y: Y_BACK,
+          Z: 95.00,
+          rCircleP1: 0,
+          howP2: 'Лежит на оси X=0 на уровне Z=95,00 мм (на невидимой спереди задней грани V3–V2).',
+          howP1: 'Пересечение вертикальной оси X=0 с плоской задней гранью призмы V3–V2: вверх от оси П1 Y=+44,50 мм.',
+          howP3: 'Отложить циркулем Y=44,50 мм ВЛЕВО от оси П3 (u=−44,50 мм) на высоте Z=95 мм — левый край верхней полки проёма на задней стенке.'
+        },
+        {
+          id: 'Т.11',
+          num: 11,
+          name: 'Верхний разрыв переднего ребра V0',
+          X: 0.00,
+          Y: -R_PRISM,
+          Z: 95.00,
+          rCircleP1: 0,
+          howP2: 'Лежит на переднем ребре V0 (ось X=0) на высоте Z=95,00 мм — здесь внешнее ребро прерывается вырезом «К».',
+          howP1: 'Самая нижняя вершина пятиугольника V0 на описанной окружности Ø110: вниз от оси П1 Y=−55,00 мм.',
+          howP3: 'Отложить R=55,00 мм ВПРАВО от оси П3 (u=+55,00 мм) на высоте Z=95 мм — ниже этой точки до Z=35 правый контур П3 полностью отсутствует!'
+        },
+        {
+          id: 'Т.12',
+          num: 12,
+          name: 'Правая граница фронтального полуразреза (Y=0 на V1–V2)',
+          X: X_SEC,
+          Y: 0.00,
+          Z: 120.00,
+          rCircleP1: 0,
+          howP2: 'Критически важно! Фронтальный разрез идёт по Y=0, поэтому правый очерк П2 проходит по X=+46,79 мм (уже левой половины 52,31 мм!).',
+          howP1: 'Найти точку пересечения горизонтальной оси Y=0 с правой боковой гранью пятиугольника V1–V2: вправо от центра X=+46,79 мм. Поднять линию связи вверх на П2!',
+          howP3: 'Лежит прямо на вертикальной оси симметрии вида слева (u=0, Y=0) на верхнем основании Z=120,00 мм.'
+        }
+      ];
+
+      /* =======================================================================
+         4. СОСТОЯНИЕ ПРИЛОЖЕНИЯ И ВКЛАДКИ
+         ======================================================================= */
+      const state = {
+        activeTab: 'tab2d',
+        // 2D-эпюр
+        showLinks: true,
+        showHidden: false,
+        showDims: true,
+        compassMode: 'all', // 'none' | 'all' | index (0..11)
+        zoom2d: 1.0,
+        pan2dX: 0,
+        pan2dY: 0,
+        // 3D CAD
+        secMode: 'full', // 'full' | 'quarter' | 'profile' | 'frontal'
+        cadStyle: 'edu', // 'edu' | 'kompas'
+        show3dAxes: true,
+        yaw: -0.62,
+        pitch: 0.42,
+        zoom3d: 1.0
+      };
+
+      const tabBtns = document.querySelectorAll('.tab-btn');
+      const tabPanels = document.querySelectorAll('.tab-panel');
+      function switchTab(tabId) {
+        state.activeTab = tabId;
+        tabBtns.forEach((b) => b.classList.toggle('active', b.dataset.tab === tabId));
+        tabPanels.forEach((p) => p.classList.toggle('active', p.id === tabId));
+        requestAnimationFrame(() => {
+          if (tabId === 'tab2d') resize2D();
+          if (tabId === 'tab3d') resize3D();
+        });
+      }
+      tabBtns.forEach((btn) => btn.addEventListener('click', () => switchTab(btn.dataset.tab)));
+
+      /* =======================================================================
+         5. ПОСТРОЕНИЕ КНОПОК «🧭 ЦИРКУЛЬ РК-1» И ТАБЛИЦЫ ТОЧЕК
+         ======================================================================= */
+      const compassButtonsEl = document.getElementById('compassButtons');
+      const algoCardEl = document.getElementById('algoCard');
+      const algoTitleEl = document.getElementById('algoTitle');
+      const algoCoordsEl = document.getElementById('algoCoords');
+      const algoP2El = document.getElementById('algoP2');
+      const algoP1El = document.getElementById('algoP1');
+      const algoP3El = document.getElementById('algoP3');
+      const tableBodyEl = document.getElementById('pointsTableBody');
+
+      function fmt(val) {
+        const s = val.toFixed(2).replace('.', ',');
+        return val > 0.004 ? '+' + s : (Math.abs(val) < 0.005 ? '0,00' : s.replace('-', '−'));
+      }
+      function fmtAbs(val) {
+        return Math.abs(val).toFixed(2).replace('.', ',');
+      }
+
+      function buildCompassUI() {
+        compassButtonsEl.innerHTML = '';
+        const mkBtn = (label, mode, extraClass = '') => {
+          const b = document.createElement('button');
+          b.className = 'pt-btn ' + extraClass;
+          b.textContent = label;
+          b.dataset.mode = String(mode);
+          b.addEventListener('click', () => setCompassMode(mode));
+          compassButtonsEl.appendChild(b);
+        };
+        mkBtn('Скрыть', 'none', 'neutral');
+        mkBtn('Все точки', 'all', 'neutral');
+        KEY_POINTS_3D.forEach((pt, idx) => mkBtn(pt.id, idx));
+      }
+
+      function buildPointsTable() {
+        tableBodyEl.innerHTML = '';
+        KEY_POINTS_3D.forEach((pt, idx) => {
+          const tr = document.createElement('tr');
+          tr.dataset.idx = String(idx);
+          tr.innerHTML = `
+            <td><span class="pt-pill">${pt.id}</span></td>
+            <td>${pt.name}</td>
+            <td class="mono">${fmt(pt.X)}</td>
+            <td class="mono">${fmt(pt.Y)}</td>
+            <td class="mono">${fmtAbs(pt.Z)}</td>
+            <td class="mono">${pt.rCircleP1 > 0 ? 'R = ' + fmtAbs(pt.rCircleP1) : 'Грань призмы'}</td>
+            <td class="mono" style="color:#6d28d9;">⌖ ${fmtAbs(pt.Y)} мм</td>
+            <td><span class="action-link">Показать →</span></td>
+          `;
+          tr.addEventListener('click', () => {
+            setCompassMode(idx);
+            switchTab('tab2d');
+          });
+          tableBodyEl.appendChild(tr);
+        });
+      }
+
+      function setCompassMode(mode) {
+        state.compassMode = mode;
+        document.querySelectorAll('#compassButtons .pt-btn').forEach((b) => {
+          b.classList.toggle('active', b.dataset.mode === String(mode));
+        });
+        document.querySelectorAll('#pointsTableBody tr').forEach((tr) => {
+          tr.classList.toggle('selected-row', typeof mode === 'number' && tr.dataset.idx === String(mode));
+        });
+
+        if (typeof mode === 'number') {
+          const pt = KEY_POINTS_3D[mode];
+          algoTitleEl.textContent = `${pt.id} — ${pt.name}`;
+          algoCoordsEl.textContent = `X = ${fmt(pt.X)} · Y = ${fmt(pt.Y)} · Z = ${fmtAbs(pt.Z)} мм`;
+          algoP2El.textContent = pt.howP2;
+          algoP1El.textContent = pt.howP1;
+          algoP3El.textContent = pt.howP3;
+          algoCardEl.classList.add('visible');
+        } else {
+          algoCardEl.classList.remove('visible');
+        }
+        draw2D();
+        if (state.activeTab === 'tab3d') draw3D();
+      }
+
+      buildCompassUI();
+      buildPointsTable();
+
+      /* =======================================================================
+         6. ЧИСТЫЙ 2D-ЭПЮР (ГОСТ 2.303-68, 2.305-2008, 2.307-2011) + ЦИРКУЛЬ РК-1
+         ======================================================================= */
+      const stage2d = document.getElementById('stage2d');
+      const canvas2d = document.getElementById('canvas2d');
+      const ctx2 = canvas2d.getContext('2d');
+
+      let W2 = 800, H2 = 600, DPR2 = 1;
+      // Параметры компоновки 2D-проекций (в экранных пикселях)
+      const layout2D = {
+        s: 2.2,
+        xF: 260,
+        yF: 320, // Уровень Z = 0 на П2 и П3
+        yT: 510, // Уровень Y = 0 на П1
+        xL: 580  // Вертикальная ось u = 0 (Y = 0) на П3
+      };
+
+      // 4 ЕДИНЫЕ КАНОНИЧЕСКИЕ ФУНКЦИИ ПРОЕЦИРОВАНИЯ
+      function projP2(X, Z) {
+        return { x: layout2D.xF + X * layout2D.s, y: layout2D.yF - Z * layout2D.s };
+      }
+      function projP1(X, Y) {
+        return { x: layout2D.xF + X * layout2D.s, y: layout2D.yT - Y * layout2D.s };
+      }
+      function projP3(Y, Z) {
+        // u = -Y: задняя половина (+Y) СЛЕВА от оси, передняя (-Y) СПРАВА от оси!
+        return { x: layout2D.xL - Y * layout2D.s, y: layout2D.yF - Z * layout2D.s };
+      }
+      function projP45(Y) {
+        // Пересечение горизонтали Y на П1 с прямой 45° через (xL, yT)
+        return { x: layout2D.xL - Y * layout2D.s, y: layout2D.yT - Y * layout2D.s };
+      }
+
+      function computeLayout2D() {
+        // Логические габариты чертежа в мм:
+        // X от xF - 86 до xF + 150 + 88 = 324 мм (разница xL - xF = 150 мм -> зазор П2..П3 = 58.7 мм!)
+        // Y от yF - 166 до yF + 96 + 68 = 330 мм (разница yT - yF = 96 мм -> зазор П2..П1 = 41 мм!)
+        const DX_AXIS_MM = 150.0;
+        const DY_AXIS_MM = 96.0;
+        const totalMmW = 86 + DX_AXIS_MM + 88;  // 324 мм
+        const totalMmH = 166 + DY_AXIS_MM + 68; // 330 мм
+        const pad = 16;
+        const baseScale = Math.min((W2 - pad * 2) / totalMmW, (H2 - pad * 2) / totalMmH);
+        const s = Math.max(0.8, baseScale * state.zoom2d);
+
+        const cx = W2 * 0.5 + state.pan2dX;
+        const cy = H2 * 0.5 + state.pan2dY;
+
+        // Смещаем так, чтобы весь блок [-86 .. +238] x [-166 .. +164] был ровно по центру
+        const centerMmX = (-86 + DX_AXIS_MM + 88) * 0.5; // +76 мм от xF
+        const centerMmY = (-166 + DY_AXIS_MM + 68) * 0.5; // -1 мм от yF
+
+        layout2D.s = s;
+        layout2D.xF = cx - centerMmX * s;
+        layout2D.yF = cy - centerMmY * s;
+        layout2D.yT = layout2D.yF + DY_AXIS_MM * s;
+        layout2D.xL = layout2D.xF + DX_AXIS_MM * s;
+      }
+
+      // Изолированная штриховка 45° по ГОСТ 2.306-68 со строгим save/clip/restore
+      function fillHatchClip(ctx, pathFn, angleDeg = -45, stepMm = 4.2) {
+        ctx.save();
+        ctx.beginPath();
+        pathFn(ctx);
+        ctx.closePath();
+        ctx.clip();
+
+        const step = Math.max(4.5, stepMm * layout2D.s);
+        const rad = angleDeg * DEG;
+        const cosA = Math.cos(rad);
+        const sinA = Math.sin(rad);
+        const diag = Math.hypot(W2, H2);
+
+        ctx.strokeStyle = '#334155';
+        ctx.lineWidth = Math.max(0.75, 0.34 * layout2D.s);
+        ctx.setLineDash([]);
+        ctx.beginPath();
+        for (let d = -diag; d <= diag; d += step) {
+          const px = W2 * 0.5 - sinA * d;
+          const py = H2 * 0.5 + cosA * d;
+          ctx.moveTo(px - cosA * diag, py - sinA * diag);
+          ctx.lineTo(px + cosA * diag, py + sinA * diag);
+        }
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      // Рисование стрелки ГОСТ 2.307-2011
+      function drawArrow(ctx, tipX, tipY, dirX, dirY, color = '#1e293b', len = null) {
+        const L = len || Math.max(7.5, Math.min(13, 4.2 * layout2D.s));
+        const W = L * 0.28;
+        const mag = Math.hypot(dirX, dirY) || 1;
+        const ux = dirX / mag;
+        const uy = dirY / mag;
+        const nx = -uy;
+        const ny = ux;
+        ctx.save();
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.moveTo(tipX, tipY);
+        ctx.lineTo(tipX - ux * L + nx * W, tipY - uy * L + ny * W);
+        ctx.lineTo(tipX - ux * L - nx * W, tipY - uy * L - ny * W);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+      }
+
+      // СТРОГО ОРТОГОНАЛЬНЫЙ ГОРИЗОНТАЛЬНЫЙ РАЗМЕР ГОСТ 2.307-2011
+      function drawHorizDim(ctx, x1, y1, x2, y2, yDim, text) {
+        const s = layout2D.s;
+        const extOver = Math.max(4, 2.2 * s);
+        const dir1 = yDim < y1 ? -1 : 1;
+        const dir2 = yDim < y2 ? -1 : 1;
+        const thinW = Math.max(0.75, 0.34 * s);
+        const fontSize = Math.max(10.5, Math.min(15, 4.7 * s));
+
+        ctx.save();
+        ctx.strokeStyle = '#1e293b';
+        ctx.fillStyle = '#0f172a';
+        ctx.lineWidth = thinW;
+        ctx.setLineDash([]);
+
+        // Выносные линии строго вертикальны
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x1, yDim + dir1 * extOver);
+        ctx.moveTo(x2, y2);
+        ctx.lineTo(x2, yDim + dir2 * extOver);
+        // Размерная линия строго горизонтальна
+        ctx.moveTo(x1, yDim);
+        ctx.lineTo(x2, yDim);
+        ctx.stroke();
+
+        const sign = x2 >= x1 ? 1 : -1;
+        drawArrow(ctx, x1, yDim, -sign, 0);
+        drawArrow(ctx, x2, yDim, sign, 0);
+
+        ctx.font = `italic 600 ${fontSize}px ${getComputedStyle(document.body).fontFamily}`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'bottom';
+        ctx.fillText(text, (x1 + x2) * 0.5, yDim - 3);
+        ctx.restore();
+      }
+
+      // СТРОГО ОРТОГОНАЛЬНЫЙ ВЕРТИКАЛЬНЫЙ РАЗМЕР ГОСТ 2.307-2011
+      function drawVertDim(ctx, x1, y1, x2, y2, xDim, text) {
+        const s = layout2D.s;
+        const extOver = Math.max(4, 2.2 * s);
+        const dir1 = xDim < x1 ? -1 : 1;
+        const dir2 = xDim < x2 ? -1 : 1;
+        const thinW = Math.max(0.75, 0.34 * s);
+        const fontSize = Math.max(10.5, Math.min(15, 4.7 * s));
+
+        ctx.save();
+        ctx.strokeStyle = '#1e293b';
+        ctx.fillStyle = '#0f172a';
+        ctx.lineWidth = thinW;
+        ctx.setLineDash([]);
+
+        // Выносные линии строго горизонтальны
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(xDim + dir1 * extOver, y1);
+        ctx.moveTo(x2, y2);
+        ctx.lineTo(xDim + dir2 * extOver, y2);
+        // Размерная линия строго вертикальна
+        ctx.moveTo(xDim, y1);
+        ctx.lineTo(xDim, y2);
+        ctx.stroke();
+
+        const sign = y2 >= y1 ? 1 : -1;
+        drawArrow(ctx, xDim, y1, 0, -sign);
+        drawArrow(ctx, xDim, y2, 0, sign);
+
+        ctx.translate(xDim - 4, (y1 + y2) * 0.5);
+        ctx.rotate(-Math.PI / 2);
+        ctx.font = `italic 600 ${fontSize}px ${getComputedStyle(document.body).fontFamily}`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'bottom';
+        ctx.fillText(text, 0, 0);
+        ctx.restore();
+      }
+
+      // РАЗМЕР ДИАМЕТРА С ОБРЫВОМ ЗА ОСЬЮ (ГОСТ 2.307-2011, для полуразреза Ø80)
+      function drawHalfDiamDim(ctx, xAxis, xEdge, yEdge, yDim, text) {
+        const s = layout2D.s;
+        const extOver = Math.max(4, 2.2 * s);
+        const pastAxis = 13 * s; // Обрыв за осью симметрии
+        const thinW = Math.max(0.75, 0.34 * s);
+        const fontSize = Math.max(10.5, Math.min(15, 4.7 * s));
+
+        ctx.save();
+        ctx.strokeStyle = '#1e293b';
+        ctx.fillStyle = '#0f172a';
+        ctx.lineWidth = thinW;
+        ctx.setLineDash([]);
+
+        ctx.beginPath();
+        ctx.moveTo(xEdge, yEdge);
+        ctx.lineTo(xEdge, yDim - extOver);
+        ctx.moveTo(xAxis - pastAxis, yDim);
+        ctx.lineTo(xEdge, yDim);
+        ctx.stroke();
+
+        drawArrow(ctx, xEdge, yDim, 1, 0);
+
+        ctx.font = `italic 600 ${fontSize}px ${getComputedStyle(document.body).fontFamily}`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'bottom';
+        ctx.fillText(text, (xAxis + xEdge) * 0.5 - 2 * s, yDim - 3);
+        ctx.restore();
+      }
+
+      // РАЗМЕР ДИАМЕТРА ОКРУЖНОСТИ С ПОЛКОЙ-ВЫНОСКОЙ (Ø110 на П1)
+      function drawDiamDim(ctx, cx, cy, rPx, angleDeg, text) {
+        const s = layout2D.s;
+        const rad = angleDeg * DEG;
+        const ux = Math.cos(rad);
+        const uy = -Math.sin(rad); // Экранная Y вниз
+        const p1x = cx - ux * rPx;
+        const p1y = cy - uy * rPx;
+        const p2x = cx + ux * rPx;
+        const p2y = cy + uy * rPx;
+        const outLen = 18 * s;
+        const shelfLen = 22 * s;
+        const p3x = p2x + ux * outLen;
+        const p3y = p2y + uy * outLen;
+        const thinW = Math.max(0.75, 0.34 * s);
+        const fontSize = Math.max(10.5, Math.min(15, 4.7 * s));
+
+        ctx.save();
+        ctx.strokeStyle = '#1e293b';
+        ctx.fillStyle = '#0f172a';
+        ctx.lineWidth = thinW;
+        ctx.setLineDash([]);
+
+        ctx.beginPath();
+        ctx.moveTo(p1x, p1y);
+        ctx.lineTo(p3x, p3y);
+        ctx.lineTo(p3x + shelfLen, p3y);
+        ctx.stroke();
+
+        drawArrow(ctx, p1x, p1y, -ux, -uy);
+        drawArrow(ctx, p2x, p2y, ux, uy);
+
+        ctx.font = `italic 600 ${fontSize}px ${getComputedStyle(document.body).fontFamily}`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'bottom';
+        ctx.fillText(text, p3x + shelfLen * 0.5, p3y - 3);
+        ctx.restore();
+      }
+
+      // Осевая штрихпунктирная линия ГОСТ 2.303-68
+      function drawAxisLine(ctx, x1, y1, x2, y2) {
+        const s = layout2D.s;
+        ctx.save();
+        ctx.strokeStyle = '#64748b';
+        ctx.lineWidth = Math.max(0.7, 0.32 * s);
+        ctx.setLineDash([Math.max(10, 6.5 * s), Math.max(3, 1.8 * s), Math.max(2, 1.0 * s), Math.max(3, 1.8 * s)]);
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      // Волнистая линия обрыва/границы вида и разреза (ГОСТ 2.303-68)
+      function drawWavySegment(ctx, xBase, yStart, yEnd, ampPx, waves) {
+        ctx.beginPath();
+        const steps = 40;
+        for (let i = 0; i <= steps; i++) {
+          const t = i / steps;
+          const y = yStart + (yEnd - yStart) * t;
+          // Плавное затухание на концах, если нужно
+          const x = xBase + Math.sin(t * Math.PI * waves) * ampPx;
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
+
+      // Скобка-индикатор для инспектора «🧭 Циркуль РК-1»
+      function drawCompassBracket(ctx, x1, y1, x2, y2, label, color, offsetPx, isHoriz) {
+        ctx.save();
+        ctx.strokeStyle = color;
+        ctx.fillStyle = color;
+        ctx.lineWidth = 1.8;
+        ctx.setLineDash([]);
+
+        let bx1 = x1, by1 = y1, bx2 = x2, by2 = y2;
+        if (isHoriz) {
+          by1 = y1 + offsetPx;
+          by2 = y2 + offsetPx;
+        } else {
+          bx1 = x1 + offsetPx;
+          bx2 = x2 + offsetPx;
+        }
+
+        // Тонкие выноски
+        ctx.save();
+        ctx.lineWidth = 1.0;
+        ctx.setLineDash([3, 3]);
+        ctx.beginPath();
+        ctx.moveTo(x1, y1); ctx.lineTo(bx1, by1);
+        ctx.moveTo(x2, y2); ctx.lineTo(bx2, by2);
+        ctx.stroke();
+        ctx.restore();
+
+        // Основная линия со стрелками
+        ctx.beginPath();
+        ctx.moveTo(bx1, by1);
+        ctx.lineTo(bx2, by2);
+        ctx.stroke();
+
+        const dx = bx2 - bx1, dy = by2 - by1;
+        const dist = Math.hypot(dx, dy);
+        if (dist > 10) {
+          drawArrow(ctx, bx1, by1, -dx, -dy, color, Math.min(9, dist * 0.4));
+          drawArrow(ctx, bx2, by2, dx, dy, color, Math.min(9, dist * 0.4));
+        }
+
+        // Плашка с текстом
+        const mx = (bx1 + bx2) * 0.5;
+        const my = (by1 + by2) * 0.5;
+        ctx.font = '700 11px ' + getComputedStyle(document.body).fontFamily;
+        const tw = ctx.measureText(label).width;
+        const padX = 6, padY = 3;
+        const lx = isHoriz ? mx : (offsetPx < 0 ? mx - tw * 0.5 - 8 : mx + tw * 0.5 + 8);
+        const ly = isHoriz ? (offsetPx < 0 ? my - 11 : my + 12) : my;
+
+        ctx.fillStyle = 'rgba(255,255,255,0.94)';
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        roundRect(ctx, lx - tw * 0.5 - padX, ly - 7 - padY, tw + padX * 2, 14 + padY * 2, 5);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = color;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(label, lx, ly);
+        ctx.restore();
+      }
+
+      function roundRect(ctx, x, y, w, h, r) {
+        ctx.moveTo(x + r, y);
+        ctx.arcTo(x + w, y, x + w, y + h, r);
+        ctx.arcTo(x + w, y + h, x, y + h, r);
+        ctx.arcTo(x, y + h, x, y, r);
+        ctx.arcTo(x, y, x + w, y, r);
+      }
+
+      /* =======================================================================
+         ГЛАВНАЯ ФУНКЦИЯ ОТРИСОВКИ ЧИСТОГО 2D-ЭПЮРА
+         ======================================================================= */
+      function draw2D() {
+        computeLayout2D();
+        const ctx = ctx2;
+        const s = layout2D.s;
+
+        ctx.save();
+        ctx.setTransform(DPR2, 0, 0, DPR2, 0, 0);
+        // Чистый белый фон (БЕЗ рамок, штампов, таблиц и миниатюр!)
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, W2, H2);
+
+        const thickW = Math.max(1.5, 0.85 * s);
+        const thinW = Math.max(0.75, 0.35 * s);
+        const dashW = Math.max(1.0, 0.48 * s);
+        const dashPat = [Math.max(5, 3.0 * s), Math.max(3, 1.8 * s)];
+
+        // ---------------------------------------------------------------------
+        // СЛОЙ 0: ЛИНИИ ПРОЕКЦИОННОЙ СВЯЗИ И ПОСТОЯННАЯ ПРЯМАЯ 45°
+        // ---------------------------------------------------------------------
+        if (state.showLinks) {
+          ctx.save();
+          // Прямая 45° через (xL, yT)
+          const p45Top = projP45(+62);
+          const p45Bot = projP45(-62);
+          ctx.strokeStyle = '#94a3b8';
+          ctx.lineWidth = Math.max(0.9, 0.4 * s);
+          ctx.setLineDash([6, 4]);
+          ctx.beginPath();
+          ctx.moveTo(p45Top.x, p45Top.y);
+          ctx.lineTo(p45Bot.x, p45Bot.y);
+          ctx.stroke();
+
+          ctx.fillStyle = '#64748b';
+          ctx.font = `700 ${Math.max(10, 3.8 * s)}px ${getComputedStyle(document.body).fontFamily}`;
+          ctx.fillText('45°', p45Bot.x + 5, p45Bot.y + 4);
+
+          // Линии связи для ключевых точек (строго от центра точки до центра точки!)
+          const ptsToLink =
+            typeof state.compassMode === 'number'
+              ? [KEY_POINTS_3D[state.compassMode]]
+              : state.compassMode === 'all'
+              ? KEY_POINTS_3D
+              : [KEY_POINTS_3D[0], KEY_POINTS_3D[2], KEY_POINTS_3D[4], KEY_POINTS_3D[5], KEY_POINTS_3D[11]];
+
+          ptsToLink.forEach((pt) => {
+            const isSel = typeof state.compassMode === 'number';
+            const p2 = projP2(pt.X, pt.Z);
+            const p1 = projP1(pt.X, pt.Y);
+            const p3 = projP3(pt.Y, pt.Z);
+            const p45 = projP45(pt.Y);
+
+            ctx.strokeStyle = isSel ? 'rgba(124, 58, 237, 0.72)' : 'rgba(59, 130, 246, 0.25)';
+            ctx.lineWidth = isSel ? 1.5 : 0.9;
+            ctx.setLineDash(isSel ? [6, 3] : [3, 3]);
+
+            ctx.beginPath();
+            // П2 <-> П1
+            ctx.moveTo(p2.x, p2.y);
+            ctx.lineTo(p1.x, p1.y);
+            // П2 <-> П3
+            ctx.moveTo(p2.x, p2.y);
+            ctx.lineTo(p3.x, p3.y);
+            // П1 -> 45° -> П3
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p45.x, p45.y);
+            ctx.lineTo(p3.x, p3.y);
+            ctx.stroke();
+
+            if (isSel) {
+              // Точка излома на 45°
+              ctx.fillStyle = '#7c3aed';
+              ctx.beginPath();
+              ctx.arc(p45.x, p45.y, 3.5, 0, Math.PI * 2);
+              ctx.fill();
+            }
+          });
+          ctx.restore();
+        }
+
+        // ---------------------------------------------------------------------
+        // СЛОЙ 1: ОСЕВЫЕ ЛИНИИ (П2, П1, П3)
+        // ---------------------------------------------------------------------
+        // Ось П2
+        const aP2Top = projP2(0, H + 8);
+        const aP2Bot = projP2(0, -8);
+        drawAxisLine(ctx, aP2Top.x, aP2Top.y, aP2Bot.x, aP2Bot.y);
+
+        // Оси П1
+        const aP1T = projP1(0, R_PRISM + 7);
+        const aP1B = projP1(0, -(R_PRISM + 7));
+        const aP1L = projP1(-(R_PRISM + 7), 0);
+        const aP1R = projP1(R_PRISM + 7, 0);
+        drawAxisLine(ctx, aP1T.x, aP1T.y, aP1B.x, aP1B.y);
+        drawAxisLine(ctx, aP1L.x, aP1L.y, aP1R.x, aP1R.y);
+
+        // Ось П3
+        const aP3Top = projP3(0, H + 8);
+        const aP3Bot = projP3(0, -8);
+        drawAxisLine(ctx, aP3Top.x, aP3Top.y, aP3Bot.x, aP3Bot.y);
+
+        // ---------------------------------------------------------------------
+        // СЛОЙ 2: ГЛАВНЫЙ ВИД П2 (1/2 ВИДА СЛЕВА + 1/2 ФРОНТАЛЬНОГО РАЗРЕЗА СПРАВА)
+        // ---------------------------------------------------------------------
+        // 2.1 Штриховка правой половины фронтального разреза Y = 0
+        // Контур сечения металла: (0, 0) -> (+40, 120) -> (+X_SEC, 120) -> (+X_SEC, 0)
+        fillHatchClip(ctx, (c) => {
+          const pA = projP2(0, 0);
+          const pB = projP2(R_CONE_TOP, H);
+          const pC = projP2(X_SEC, H);
+          const pD = projP2(X_SEC, 0);
+          c.moveTo(pA.x, pA.y);
+          c.lineTo(pB.x, pB.y);
+          c.lineTo(pC.x, pC.y);
+          c.lineTo(pD.x, pD.y);
+        }, -45, 4.3);
+
+        // 2.2 Штриховые линии на левой половине П2 (при включении чекбокса)
+        if (state.showHidden) {
+          ctx.save();
+          ctx.strokeStyle = '#334155';
+          ctx.lineWidth = dashW;
+          ctx.setLineDash(dashPat);
+          ctx.beginPath();
+          // Заднее ребро V3 (X = -32.33)
+          let a = projP2(-X_V2, 0), b = projP2(-X_V2, H);
+          ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+          // Левая образующая конуса (0,0) -> (-40, 120)
+          a = projP2(0, 0); b = projP2(-R_CONE_TOP, H);
+          ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+          ctx.stroke();
+          ctx.restore();
+        }
+
+        // 2.3 Сплошные толстые контуры П2
+        ctx.save();
+        ctx.strokeStyle = '#0f172a';
+        ctx.lineWidth = thickW;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.setLineDash([]);
+
+        ctx.beginPath();
+        // Внешний контур: слева до -X_V1 (-52.31), справа до +X_SEC (+46.79)
+        const p2LT = projP2(-X_V1, H);
+        const p2RT = projP2(+X_SEC, H);
+        const p2RB = projP2(+X_SEC, 0);
+        const p2LB = projP2(-X_V1, 0);
+        ctx.moveTo(p2LT.x, p2LT.y);
+        ctx.lineTo(p2RT.x, p2RT.y);
+        ctx.lineTo(p2RB.x, p2RB.y);
+        ctx.lineTo(p2LB.x, p2LB.y);
+        ctx.closePath();
+
+        // Правая образующая конуса в разрезе: (0,0) -> (+40, 120)
+        const p2C0 = projP2(0, 0);
+        const p2C1 = projP2(R_CONE_TOP, H);
+        ctx.moveTo(p2C0.x, p2C0.y);
+        ctx.lineTo(p2C1.x, p2C1.y);
+
+        // Переднее ребро V0 (X = 0): Z ∈ [95; 120] и Z ∈ [0; 35]
+        const p2V0_120 = projP2(0, H);
+        const p2V0_95 = projP2(0, Z_TOP);
+        const p2V0_35 = projP2(0, Z_BOT);
+        ctx.moveTo(p2V0_120.x, p2V0_120.y);
+        ctx.lineTo(p2V0_95.x, p2V0_95.y);
+        ctx.moveTo(p2V0_35.x, p2V0_35.y);
+        ctx.lineTo(p2C0.x, p2C0.y);
+
+        // Трапеция сквозного выреза «К» (видна полностью на П2)
+        const kTL = projP2(-X_K_TOP, Z_TOP);
+        const kTR = projP2(+X_K_TOP, Z_TOP);
+        const kBR = projP2(+X_K_BOT, Z_BOT);
+        const kBL = projP2(-X_K_BOT, Z_BOT);
+        ctx.moveTo(kTL.x, kTL.y);
+        ctx.lineTo(kTR.x, kTR.y);
+        ctx.lineTo(kBR.x, kBR.y);
+        ctx.lineTo(kBL.x, kBL.y);
+        ctx.closePath();
+        ctx.stroke();
+
+        // 2.4 Сплошная тонкая волнистая линия границы вида и разреза (ГОСТ 2.305-2008)
+        // Сдвинута правее оси X = 0, чтобы сохранить внешнее ребро V0!
+        ctx.strokeStyle = '#0f172a';
+        ctx.lineWidth = thinW;
+        // Верхний участок Z ∈ [95; 120] при X ≈ +2.8 мм
+        const wTopA = projP2(2.8, H);
+        const wTopB = projP2(2.8, Z_TOP);
+        drawWavySegment(ctx, wTopA.x, wTopA.y, wTopB.y, 1.15 * s, 2.5);
+        // Нижний участок Z ∈ [0; 35]: плавно уходит от X ≈ +2.4 мм в (0, 0)
+        ctx.beginPath();
+        for (let i = 0; i <= 32; i++) {
+          const t = i / 32; // 0 на Z=35, 1 на Z=0
+          const z = Z_BOT * (1 - t);
+          const xMm = 2.4 * (1 - t) + Math.sin(t * Math.PI * 2.5) * 0.9 * (1 - t * 0.7);
+          const pt = projP2(xMm, z);
+          if (i === 0) ctx.moveTo(pt.x, pt.y);
+          else ctx.lineTo(pt.x, pt.y);
+        }
+        ctx.stroke();
+        ctx.restore();
+
+        // ---------------------------------------------------------------------
+        // СЛОЙ 3: ВИД СВЕРХУ П1 (ПОЛНЫЙ ВИД БЕЗ РАЗРЕЗА)
+        // ---------------------------------------------------------------------
+        const cP1 = projP1(0, 0);
+
+        // 3.1 Тонкая описанная окружность Ø110 (R = 55)
+        ctx.save();
+        ctx.strokeStyle = '#475569';
+        ctx.lineWidth = thinW;
+        ctx.setLineDash([]);
+        ctx.beginPath();
+        ctx.arc(cP1.x, cP1.y, R_PRISM * s, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.restore();
+
+        // 3.2 Штриховые линии невидимых продолжений стенок «К» под козырьком конуса (чекбокс)
+        if (state.showHidden) {
+          ctx.save();
+          ctx.strokeStyle = '#334155';
+          ctx.lineWidth = dashW;
+          ctx.setLineDash(dashPat);
+          ctx.beginPath();
+          // Стенки X = ±25 (от конуса |Y|=19.44 до задней грани +44.50 и передней грани -36.84)
+          [-1, 1].forEach((sgn) => {
+            const x = sgn * X_K_TOP;
+            let pA = projP1(x, Y_K95_CONE), pB = projP1(x, Y_BACK);
+            ctx.moveTo(pA.x, pA.y); ctx.lineTo(pB.x, pB.y);
+            pA = projP1(x, -Y_K95_CONE); pB = projP1(x, Y_K95_FRONT);
+            ctx.moveTo(pA.x, pA.y); ctx.lineTo(pB.x, pB.y);
+            // Продолжения ребер дна X = ±9.21 от нависающей дуги |Y|=30.30 до граней призмы
+            const xb = sgn * X_K_BOT;
+            pA = projP1(xb, Y_BOT_EDGE_VIS); pB = projP1(xb, Y_BACK);
+            ctx.moveTo(pA.x, pA.y); ctx.lineTo(pB.x, pB.y);
+            pA = projP1(xb, -Y_BOT_EDGE_VIS); pB = projP1(xb, Y_K35_FRONT);
+            ctx.moveTo(pA.x, pA.y); ctx.lineTo(pB.x, pB.y);
+          });
+          ctx.stroke();
+          ctx.restore();
+        }
+
+        // 3.3 Сплошные толстые контуры П1
+        ctx.save();
+        ctx.strokeStyle = '#0f172a';
+        ctx.lineWidth = thickW;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.setLineDash([]);
+
+        // Пятиугольник V0..V4
+        ctx.beginPath();
+        PENT.forEach((v, idx) => {
+          const p = projP1(v.x, v.y);
+          if (idx === 0) ctx.moveTo(p.x, p.y);
+          else ctx.lineTo(p.x, p.y);
+        });
+        ctx.closePath();
+        ctx.stroke();
+
+        // Окружность устья конуса Ø80 (R = 40)
+        ctx.beginPath();
+        ctx.arc(cP1.x, cP1.y, R_CONE_TOP * s, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Внутренняя врезка выреза «К» в конус на П1:
+        // В экранных координатах Y направлен ВНИЗ, поэтому задняя ветвь (+Y) имеет угол [-PI+PHI0 .. -PHI0],
+        // а передняя ветвь (-Y) имеет угол [+PHI0 .. PI-PHI0].
+        // 2 большие дуги r(95) = 31.67
+        ctx.beginPath();
+        ctx.arc(cP1.x, cP1.y, R95 * s, -(Math.PI - PHI0), -PHI0, false);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(cP1.x, cP1.y, R95 * s, PHI0, Math.PI - PHI0, false);
+        ctx.stroke();
+
+        // 2 малые дуги r(35) = 11.67
+        ctx.beginPath();
+        ctx.arc(cP1.x, cP1.y, R35 * s, -(Math.PI - PHI0), -PHI0, false);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(cP1.x, cP1.y, R35 * s, PHI0, Math.PI - PHI0, false);
+        ctx.stroke();
+
+        // 4 радиальные образующие конуса от (±25, ±19.44) к (±9.21, ±7.16)
+        ctx.beginPath();
+        [[-1, 1], [1, 1], [-1, -1], [1, -1]].forEach(([sx, sy]) => {
+          const pOut = projP1(sx * X_K_TOP, sy * Y_K95_CONE);
+          const pIn = projP1(sx * X_K_BOT, sy * Y_K35_CONE);
+          ctx.moveTo(pOut.x, pOut.y);
+          ctx.lineTo(pIn.x, pIn.y);
+        });
+
+        // 4 видимых вертикальных отрезка ребра дна X = ±9.21 от малой дуги (|Y|=7.16) до большой (|Y|=30.30)
+        [[-1, 1], [1, 1], [-1, -1], [1, -1]].forEach(([sx, sy]) => {
+          const pA = projP1(sx * X_K_BOT, sy * Y_K35_CONE);
+          const pB = projP1(sx * X_K_BOT, sy * Y_BOT_EDGE_VIS);
+          ctx.moveTo(pA.x, pA.y);
+          ctx.lineTo(pB.x, pB.y);
+        });
+        ctx.stroke();
+        ctx.restore();
+
+        // ---------------------------------------------------------------------
+        // СЛОЙ 4: ВИД СЛЕВА П3 (ПОЛНЫЙ ПРОФИЛЬНЫЙ РАЗРЕЗ X = 0)
+        // Напомним: projP3(Y, Z) откладывает +Y (зад) ВЛЕВО (u < 0), -Y (перед) ВПРАВО (u > 0)!
+        // ---------------------------------------------------------------------
+        // 4.1 Четыре заштрихованные под 45° области (каждая через отдельный изолированный fillHatchClip)
+        // Область 1: Верх-лево (зад, Y ∈ [+31.67..+44.50])
+        fillHatchClip(ctx, (c) => {
+          const pts = [
+            projP3(Y_BACK, H),
+            projP3(R_CONE_TOP, H),
+            projP3(R95, Z_TOP),
+            projP3(Y_BACK, Z_TOP)
+          ];
+          c.moveTo(pts[0].x, pts[0].y);
+          for (let i = 1; i < pts.length; i++) c.lineTo(pts[i].x, pts[i].y);
+        }, -45, 4.3);
+
+        // Область 2: Верх-право (перед, Y ∈ [-55..-31.67])
+        fillHatchClip(ctx, (c) => {
+          const pts = [
+            projP3(-R_CONE_TOP, H),
+            projP3(-R_PRISM, H),
+            projP3(-R_PRISM, Z_TOP),
+            projP3(-R95, Z_TOP)
+          ];
+          c.moveTo(pts[0].x, pts[0].y);
+          for (let i = 1; i < pts.length; i++) c.lineTo(pts[i].x, pts[i].y);
+        }, -45, 4.3);
+
+        // Область 3: Низ-лево (зад, Y ∈ [0..+44.50])
+        fillHatchClip(ctx, (c) => {
+          const pts = [
+            projP3(Y_BACK, Z_BOT),
+            projP3(R35, Z_BOT),
+            projP3(0, 0),
+            projP3(Y_BACK, 0)
+          ];
+          c.moveTo(pts[0].x, pts[0].y);
+          for (let i = 1; i < pts.length; i++) c.lineTo(pts[i].x, pts[i].y);
+        }, -45, 4.3);
+
+        // Область 4: Низ-право (перед, Y ∈ [-55..0])
+        fillHatchClip(ctx, (c) => {
+          const pts = [
+            projP3(-R35, Z_BOT),
+            projP3(-R_PRISM, Z_BOT),
+            projP3(-R_PRISM, 0),
+            projP3(0, 0)
+          ];
+          c.moveTo(pts[0].x, pts[0].y);
+          for (let i = 1; i < pts.length; i++) c.lineTo(pts[i].x, pts[i].y);
+        }, -45, 4.3);
+
+        // 4.2 Сплошные толстые контуры П3
+        ctx.save();
+        ctx.strokeStyle = '#0f172a';
+        ctx.lineWidth = thickW;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.setLineDash([]);
+
+        ctx.beginPath();
+        // Левая вертикальная граница (задняя грань u = -44.50, Z ∈ [0; 120])
+        let pA = projP3(Y_BACK, 0), pB = projP3(Y_BACK, H);
+        ctx.moveTo(pA.x, pA.y); ctx.lineTo(pB.x, pB.y);
+
+        // Верхний край Z = 120 (от u = -44.50 до u = +55.00 — видна дальняя половина устья конуса)
+        pA = projP3(Y_BACK, H); pB = projP3(-R_PRISM, H);
+        ctx.moveTo(pA.x, pA.y); ctx.lineTo(pB.x, pB.y);
+
+        // Нижний край Z = 0 (от u = -44.50 до u = +55.00)
+        pA = projP3(Y_BACK, 0); pB = projP3(-R_PRISM, 0);
+        ctx.moveTo(pA.x, pA.y); ctx.lineTo(pB.x, pB.y);
+
+        // Правая граница (переднее ребро V0, u = +55.00) с ПУСТЫМ РАЗРЫВОМ на Z ∈ (35; 95)!
+        pA = projP3(-R_PRISM, H); pB = projP3(-R_PRISM, Z_TOP);
+        ctx.moveTo(pA.x, pA.y); ctx.lineTo(pB.x, pB.y);
+        pA = projP3(-R_PRISM, Z_BOT); pB = projP3(-R_PRISM, 0);
+        ctx.moveTo(pA.x, pA.y); ctx.lineTo(pB.x, pB.y);
+
+        // Образующие конуса в сечении X = 0:
+        // Верх-лево: (-40, 120) -> (-31.67, 95)
+        pA = projP3(R_CONE_TOP, H); pB = projP3(R95, Z_TOP);
+        ctx.moveTo(pA.x, pA.y); ctx.lineTo(pB.x, pB.y);
+        // Верх-право: (+40, 120) -> (+31.67, 95)
+        pA = projP3(-R_CONE_TOP, H); pB = projP3(-R95, Z_TOP);
+        ctx.moveTo(pA.x, pA.y); ctx.lineTo(pB.x, pB.y);
+        // Низ-лево: (-11.67, 35) -> (0, 0)
+        pA = projP3(R35, Z_BOT); pB = projP3(0, 0);
+        ctx.moveTo(pA.x, pA.y); ctx.lineTo(pB.x, pB.y);
+        // Низ-право: (+11.67, 35) -> (0, 0)
+        pA = projP3(-R35, Z_BOT); pB = projP3(0, 0);
+        ctx.moveTo(pA.x, pA.y); ctx.lineTo(pB.x, pB.y);
+
+        // Горизонтальные полки на Z = 95 (включая видимые полки за плоскостью разреза до Y = ±19.44)
+        pA = projP3(Y_BACK, Z_TOP); pB = projP3(Y_K95_CONE, Z_TOP);
+        ctx.moveTo(pA.x, pA.y); ctx.lineTo(pB.x, pB.y);
+        pA = projP3(-Y_K95_CONE, Z_TOP); pB = projP3(-R_PRISM, Z_TOP);
+        ctx.moveTo(pA.x, pA.y); ctx.lineTo(pB.x, pB.y);
+
+        // Горизонтальные полки на Z = 35 (до Y = ±7.16)
+        pA = projP3(Y_BACK, Z_BOT); pB = projP3(Y_K35_CONE, Z_BOT);
+        ctx.moveTo(pA.x, pA.y); ctx.lineTo(pB.x, pB.y);
+        pA = projP3(-Y_K35_CONE, Z_BOT); pB = projP3(-R_PRISM, Z_BOT);
+        ctx.moveTo(pA.x, pA.y); ctx.lineTo(pB.x, pB.y);
+
+        // ТРИ ПРЯМЫЕ НАКЛОННЫЕ ЛИНИИ В ПРОЕМЕ Z ∈ [35; 95]:
+        // 1) Задняя врезка в конус: (u = -19.44, Z = 95) -> (u = -7.16, Z = 35)
+        pA = projP3(Y_K95_CONE, Z_TOP); pB = projP3(Y_K35_CONE, Z_BOT);
+        ctx.moveTo(pA.x, pA.y); ctx.lineTo(pB.x, pB.y);
+        // 2) Передняя врезка в конус: (u = +19.44, Z = 95) -> (u = +7.16, Z = 35)
+        pA = projP3(-Y_K95_CONE, Z_TOP); pB = projP3(-Y_K35_CONE, Z_BOT);
+        ctx.moveTo(pA.x, pA.y); ctx.lineTo(pB.x, pB.y);
+        // 3) Внешний выход «К» на переднюю грань V0-V1: (u = +36.84, Z = 95) -> (u = +48.31, Z = 35)
+        pA = projP3(Y_K95_FRONT, Z_TOP); pB = projP3(Y_K35_FRONT, Z_BOT);
+        ctx.moveTo(pA.x, pA.y); ctx.lineTo(pB.x, pB.y);
+        ctx.stroke();
+        ctx.restore();
+
+        // ---------------------------------------------------------------------
+        // СЛОЙ 5: БЕСКОЛЛИЗИОННЫЕ ОРТОГОНАЛЬНЫЕ РАЗМЕРЫ ГОСТ 2.307-2011
+        // ---------------------------------------------------------------------
+        if (state.showDims) {
+          // На П2: высота 120 слева (ярус X = -67 мм)
+          const d120T = projP2(-X_V1, H);
+          const d120B = projP2(-X_V1, 0);
+          drawVertDim(ctx, d120T.x, d120T.y, d120B.x, d120B.y, projP2(-67, 0).x, '120');
+
+          // На П2: ширина 50 сверху (ярус Z = 133 мм)
+          const d50L = projP2(-X_K_TOP, Z_TOP);
+          const d50R = projP2(+X_K_TOP, Z_TOP);
+          drawHorizDim(ctx, d50L.x, d50L.y, d50R.x, d50R.y, projP2(0, 133).y, '50');
+
+          // На П2: диаметр Ø80 с обрывом за осью (ярус Z = 148 мм)
+          const d80Edge = projP2(R_CONE_TOP, H);
+          drawHalfDiamDim(ctx, projP2(0, H).x, d80Edge.x, d80Edge.y, projP2(0, 148).y, 'Ø80');
+
+          // На П1: диаметр описанной окружности Ø110 по диагонали вправо-вверх
+          drawDiamDim(ctx, cP1.x, cP1.y, R_PRISM * s, 32, 'Ø110');
+
+          // На П3: справа цепочка 25 и 60 на ярусе u = +70 мм (Y = -70)
+          const xDimP3 = projP3(-70, 0).x;
+          const d25T = projP3(-R_PRISM, H);
+          const d25B = projP3(-R_PRISM, Z_TOP);
+          const d60B = projP3(-R_PRISM, Z_BOT);
+          drawVertDim(ctx, d25T.x, d25T.y, d25B.x, d25B.y, xDimP3, '25');
+          drawVertDim(ctx, d25B.x, d25B.y, d60B.x, d60B.y, xDimP3, '60');
+        }
+
+        // ---------------------------------------------------------------------
+        // СЛОЙ 6: ИНТЕРАКТИВНЫЙ ИНСПЕКТОР «🧭 ЦИРКУЛЬ РК-1» И МАРКЕРЫ ТОЧЕК
+        // ---------------------------------------------------------------------
+        if (state.compassMode !== 'none') {
+          const isSingle = typeof state.compassMode === 'number';
+          const selectedPt = isSingle ? KEY_POINTS_3D[state.compassMode] : null;
+
+          if (selectedPt) {
+            const p2 = projP2(selectedPt.X, selectedPt.Z);
+            const p1 = projP1(selectedPt.X, selectedPt.Y);
+            const p3 = projP3(selectedPt.Y, selectedPt.Z);
+            const axP2_atZ = projP2(0, selectedPt.Z);
+            const baseP2_atX = projP2(selectedPt.X, 0);
+            const axP1_atX = projP1(selectedPt.X, 0);
+            const axP3_atZ = projP3(0, selectedPt.Z);
+
+            // 1) Опорная окружность конуса на П1 + радиус-вектор
+            if (selectedPt.rCircleP1 > 0) {
+              ctx.save();
+              ctx.strokeStyle = '#d97706';
+              ctx.lineWidth = 2.0;
+              ctx.setLineDash([6, 4]);
+              ctx.beginPath();
+              ctx.arc(cP1.x, cP1.y, selectedPt.rCircleP1 * s, 0, Math.PI * 2);
+              ctx.stroke();
+
+              // Радиус-вектор от центра П1 до точки
+              ctx.setLineDash([]);
+              ctx.strokeStyle = '#ea580c';
+              ctx.lineWidth = 2.0;
+              ctx.beginPath();
+              ctx.moveTo(cP1.x, cP1.y);
+              ctx.lineTo(p1.x, p1.y);
+              ctx.stroke();
+              drawArrow(ctx, p1.x, p1.y, p1.x - cP1.x, p1.y - cP1.y, '#ea580c', 9);
+
+              // Подпись R = ... мм
+              const rmx = (cP1.x + p1.x) * 0.5;
+              const rmy = (cP1.y + p1.y) * 0.5;
+              const rLabel = `R = ${fmtAbs(selectedPt.rCircleP1)} мм`;
+              ctx.font = '700 11px ' + getComputedStyle(document.body).fontFamily;
+              const tw = ctx.measureText(rLabel).width;
+              ctx.fillStyle = 'rgba(255,251,235,0.95)';
+              ctx.strokeStyle = '#d97706';
+              ctx.lineWidth = 1.2;
+              ctx.beginPath();
+              roundRect(ctx, rmx - tw * 0.5 - 5, rmy - 18, tw + 10, 17, 4);
+              ctx.fill();
+              ctx.stroke();
+              ctx.fillStyle = '#b45309';
+              ctx.textAlign = 'center';
+              ctx.textBaseline = 'middle';
+              ctx.fillText(rLabel, rmx, rmy - 9.5);
+              ctx.restore();
+            }
+
+            // 2) На П2: цветные скобки X от вертикальной оси и Z от основания
+            if (Math.abs(selectedPt.X) > 0.1) {
+              drawCompassBracket(
+                ctx,
+                axP2_atZ.x, axP2_atZ.y,
+                p2.x, p2.y,
+                `X = ${fmt(selectedPt.X)} мм`,
+                '#2563eb',
+                -22,
+                true
+              );
+            }
+            if (selectedPt.Z > 0.1) {
+              drawCompassBracket(
+                ctx,
+                baseP2_atX.x, baseP2_atX.y,
+                p2.x, p2.y,
+                `Z = ${fmtAbs(selectedPt.Z)} мм`,
+                '#059669',
+                selectedPt.X >= 0 ? 22 : -22,
+                false
+              );
+            }
+
+            // 3) На П1: фиолетовая скобка раствора циркуля Y от горизонтальной оси П1
+            if (Math.abs(selectedPt.Y) > 0.1) {
+              drawCompassBracket(
+                ctx,
+                axP1_atX.x, axP1_atX.y,
+                p1.x, p1.y,
+                `⌖ Y = ${fmtAbs(selectedPt.Y)} мм от оси П1`,
+                '#7c3aed',
+                selectedPt.X >= 0 ? 24 : -24,
+                false
+              );
+            }
+
+            // 4) На П3: фиолетовая скобка переноса циркуля от вертикальной оси П3
+            if (Math.abs(selectedPt.Y) > 0.1) {
+              drawCompassBracket(
+                ctx,
+                axP3_atZ.x, axP3_atZ.y,
+                p3.x, p3.y,
+                `⌖ От оси П3: Y = ${fmtAbs(selectedPt.Y)} мм`,
+                '#7c3aed',
+                selectedPt.Z > 60 ? -24 : 24,
+                true
+              );
+            }
+          }
+
+          // Отрисовка маркеров точек
+          KEY_POINTS_3D.forEach((pt, idx) => {
+            const isSel = isSingle && idx === state.compassMode;
+            if (isSingle && !isSel) return;
+
+            const coords = [
+              { p: projP2(pt.X, pt.Z), lbl: pt.num + '₂', dx: 7, dy: -7 },
+              { p: projP1(pt.X, pt.Y), lbl: pt.num + '₁', dx: 7, dy: pt.Y >= 0 ? -7 : 12 },
+              { p: projP3(pt.Y, pt.Z), lbl: pt.num + '₃', dx: pt.Y >= 0 ? -15 : 7, dy: -7 }
+            ];
+
+            coords.forEach(({ p, lbl, dx, dy }) => {
+              ctx.save();
+              ctx.fillStyle = isSel ? '#7c3aed' : '#e11d48';
+              ctx.strokeStyle = '#ffffff';
+              ctx.lineWidth = 1.6;
+              ctx.beginPath();
+              ctx.arc(p.x, p.y, isSel ? 5.2 : 3.4, 0, Math.PI * 2);
+              ctx.fill();
+              ctx.stroke();
+
+              // Подпись индекса точки
+              ctx.font = `700 ${isSel ? 12 : 10}px ${getComputedStyle(document.body).fontFamily}`;
+              ctx.fillStyle = isSel ? '#5b21b6' : '#9f1239';
+              ctx.textAlign = 'left';
+              ctx.textBaseline = 'middle';
+              ctx.fillText(lbl, p.x + dx, p.y + dy);
+              ctx.restore();
+            });
+          });
+        }
+
+        // Ненавязчивые инженерные подписи проекций (П2, П1, П3) в углах видов
+        ctx.save();
+        ctx.font = `700 ${Math.max(11, 4.2 * s)}px ${getComputedStyle(document.body).fontFamily}`;
+        ctx.fillStyle = '#94a3b8';
+        const lblP2 = projP2(-X_V1, H + 12);
+        const lblP1 = projP1(-R_PRISM, R_PRISM + 5);
+        const lblP3 = projP3(Y_BACK, H + 12);
+        ctx.fillText('П2', lblP2.x, lblP2.y);
+        ctx.fillText('П1', lblP1.x, lblP1.y);
+        ctx.fillText('П3', lblP3.x, lblP3.y);
+        ctx.restore();
+
+        ctx.restore();
+      }
+
+      function resize2D() {
+        const rect = stage2d.getBoundingClientRect();
+        if (rect.width < 10 || rect.height < 10) return;
+        DPR2 = Math.min(window.devicePixelRatio || 1, 2.5);
+        W2 = rect.width;
+        H2 = rect.height;
+        canvas2d.width = Math.round(W2 * DPR2);
+        canvas2d.height = Math.round(H2 * DPR2);
+        draw2D();
+      }
+
+      // Интерактивность 2D-холста: клик по точке, перетаскивание, колесо и pinch-зум
+      let drag2d = null;
+      let pinch2dDist = null;
+      let downPos2d = null;
+
+      function hitTestPoint2D(mx, my) {
+        let bestIdx = -1;
+        let bestD = 18;
+        KEY_POINTS_3D.forEach((pt, idx) => {
+          const pts = [projP2(pt.X, pt.Z), projP1(pt.X, pt.Y), projP3(pt.Y, pt.Z)];
+          pts.forEach((p) => {
+            const d = Math.hypot(mx - p.x, my - p.y);
+            if (d < bestD) {
+              bestD = d;
+              bestIdx = idx;
+            }
+          });
+        });
+        return bestIdx;
+      }
+
+      canvas2d.addEventListener('mousedown', (e) => {
+        const r = canvas2d.getBoundingClientRect();
+        const x = e.clientX - r.left, y = e.clientY - r.top;
+        downPos2d = { x, y };
+        drag2d = { x: e.clientX, y: e.clientY, px: state.pan2dX, py: state.pan2dY };
+      });
+      window.addEventListener('mousemove', (e) => {
+        if (!drag2d) return;
+        state.pan2dX = drag2d.px + (e.clientX - drag2d.x);
+        state.pan2dY = drag2d.py + (e.clientY - drag2d.y);
+        draw2D();
+      });
+      window.addEventListener('mouseup', (e) => {
+        if (!drag2d) return;
+        const r = canvas2d.getBoundingClientRect();
+        const x = e.clientX - r.left, y = e.clientY - r.top;
+        if (downPos2d && Math.hypot(x - downPos2d.x, y - downPos2d.y) < 6) {
+          const hit = hitTestPoint2D(x, y);
+          if (hit >= 0) setCompassMode(hit);
+        }
+        drag2d = null;
+      });
+      canvas2d.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const factor = e.deltaY < 0 ? 1.12 : 0.89;
+        state.zoom2d = Math.max(0.6, Math.min(3.5, state.zoom2d * factor));
+        draw2D();
+      }, { passive: false });
+
+      canvas2d.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 1) {
+          const t = e.touches[0];
+          const r = canvas2d.getBoundingClientRect();
+          downPos2d = { x: t.clientX - r.left, y: t.clientY - r.top };
+          drag2d = { x: t.clientX, y: t.clientY, px: state.pan2dX, py: state.pan2dY };
+          pinch2dDist = null;
+        } else if (e.touches.length === 2) {
+          drag2d = null;
+          pinch2dDist = Math.hypot(
+            e.touches[0].clientX - e.touches[1].clientX,
+            e.touches[0].clientY - e.touches[1].clientY
+          );
+        }
+      }, { passive: true });
+      canvas2d.addEventListener('touchmove', (e) => {
+        if (e.touches.length === 1 && drag2d) {
+          const t = e.touches[0];
+          state.pan2dX = drag2d.px + (t.clientX - drag2d.x);
+          state.pan2dY = drag2d.py + (t.clientY - drag2d.y);
+          draw2D();
+        } else if (e.touches.length === 2 && pinch2dDist) {
+          const d = Math.hypot(
+            e.touches[0].clientX - e.touches[1].clientX,
+            e.touches[0].clientY - e.touches[1].clientY
+          );
+          state.zoom2d = Math.max(0.6, Math.min(3.5, state.zoom2d * (d / pinch2dDist)));
+          pinch2dDist = d;
+          draw2D();
+        }
+      }, { passive: true });
+      canvas2d.addEventListener('touchend', (e) => {
+        if (drag2d && downPos2d && e.changedTouches.length === 1) {
+          const t = e.changedTouches[0];
+          const r = canvas2d.getBoundingClientRect();
+          const x = t.clientX - r.left, y = t.clientY - r.top;
+          if (Math.hypot(x - downPos2d.x, y - downPos2d.y) < 10) {
+            const hit = hitTestPoint2D(x, y);
+            if (hit >= 0) setCompassMode(hit);
+          }
+        }
+        drag2d = null;
+        pinch2dDist = null;
+      });
+
+      // Чекбоксы и кнопки 2D
+      document.getElementById('chkLinks').addEventListener('change', (e) => { state.showLinks = e.target.checked; draw2D(); });
+      document.getElementById('chkHidden').addEventListener('change', (e) => { state.showHidden = e.target.checked; draw2D(); });
+      document.getElementById('chkDims').addEventListener('change', (e) => { state.showDims = e.target.checked; draw2D(); });
+      document.getElementById('btn2dZoomIn').addEventListener('click', () => { state.zoom2d = Math.min(3.5, state.zoom2d * 1.2); draw2D(); });
+      document.getElementById('btn2dZoomOut').addEventListener('click', () => { state.zoom2d = Math.max(0.6, state.zoom2d / 1.2); draw2D(); });
+      document.getElementById('btn2dReset').addEventListener('click', () => { state.zoom2d = 1; state.pan2dX = 0; state.pan2dY = 0; draw2D(); });
+
+      /* =======================================================================
+         7. 100% АВТОНОМНЫЙ 3D B-REP SOLID CAD-ДВИЖОК (ЧИСТЫЙ JS + HTML5 CANVAS)
+         ======================================================================= */
+      const stage3d = document.getElementById('stage3d');
+      const canvas3d = document.getElementById('canvas3d');
+      const ctx3 = canvas3d.getContext('2d');
+      const legend3dEl = document.getElementById('legend3d');
+      let W3 = 800, H3 = 560, DPR3 = 1;
+
+      // Векторные утилиты 3D
+      const vSub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+      const vCross = (a, b) => [
+        a[1] * b[2] - a[2] * b[1],
+        a[2] * b[0] - a[0] * b[2],
+        a[0] * b[1] - a[1] * b[0]
+      ];
+      const vDot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+      const vNorm = (a) => {
+        const l = Math.hypot(a[0], a[1], a[2]) || 1;
+        return [a[0] / l, a[1] / l, a[2] / l];
+      };
+      const vLerp = (a, b, t) => [
+        a[0] + (b[0] - a[0]) * t,
+        a[1] + (b[1] - a[1]) * t,
+        a[2] + (b[2] - a[2]) * t
+      ];
+
+      // Построитель точной B-Rep сетки цельной детали
+      function buildFullBRep() {
+        const tris = [];
+        const edges = [];
+
+        function pushTri(p0, p1, p2, nHint, mat) {
+          const nRaw = vCross(vSub(p1, p0), vSub(p2, p0));
+          const area = Math.hypot(nRaw[0], nRaw[1], nRaw[2]);
+          if (area < 1e-4) return;
+          let n = [nRaw[0] / area, nRaw[1] / area, nRaw[2] / area];
+          if (nHint && vDot(n, nHint) < 0) {
+            n = [-n[0], -n[1], -n[2]];
+            tris.push({ v: [p0, p2, p1], n, mat });
+          } else {
+            tris.push({ v: [p0, p1, p2], n, mat });
+          }
+        }
+
+        function pushQuadGrid(fn, nu, nv, nHint, mat) {
+          for (let i = 0; i < nu; i++) {
+            const u0 = i / nu, u1 = (i + 1) / nu;
+            for (let j = 0; j < nv; j++) {
+              const v0 = j / nv, v1 = (j + 1) / nv;
+              const a = fn(u0, v0), b = fn(u1, v0), c = fn(u1, v1), d = fn(u0, v1);
+              pushTri(a, b, c, nHint, mat);
+              pushTri(a, c, d, nHint, mat);
+            }
+          }
+        }
+
+        function pushPolylineEdge(pts, closed = false) {
+          for (let i = 0; i < pts.length - 1; i++) edges.push([pts[i], pts[i + 1]]);
+          if (closed && pts.length > 2) edges.push([pts[pts.length - 1], pts[0]]);
+        }
+
+        // ---------------------------------------------------------------------
+        // A. НИЖНЕЕ ПЯТИУГОЛЬНОЕ ОСНОВАНИЕ Z = 0
+        // ---------------------------------------------------------------------
+        for (let i = 0; i < 5; i++) {
+          const A = PENT[i], B = PENT[(i + 1) % 5];
+          pushQuadGrid((u, v) => {
+            const r = u;
+            const px = (A.x + (B.x - A.x) * v) * r;
+            const py = (A.y + (B.y - A.y) * v) * r;
+            return [px, py, 0];
+          }, 4, 6, [0, 0, -1], 'prism');
+          edges.push([[A.x, A.y, 0], [B.x, B.y, 0]]);
+        }
+
+        // ---------------------------------------------------------------------
+        // B. ВЕРХНЕЕ КОЛЬЦО Z = 120 (пятиугольник с круглым отверстием Ø80)
+        // ---------------------------------------------------------------------
+        const topConePts = [];
+        for (let i = 0; i < 5; i++) {
+          const A = PENT[i], B = PENT[(i + 1) % 5];
+          const segs = 12;
+          pushQuadGrid((u, v) => {
+            const ex = A.x + (B.x - A.x) * v;
+            const ey = A.y + (B.y - A.y) * v;
+            const ang = Math.atan2(ey, ex);
+            const cx = R_CONE_TOP * Math.cos(ang);
+            const cy = R_CONE_TOP * Math.sin(ang);
+            return [cx + (ex - cx) * u, cy + (ey - cy) * u, H];
+          }, 2, segs, [0, 0, 1], 'prism');
+          edges.push([[A.x, A.y, H], [B.x, B.y, H]]);
+          for (let k = 0; k < segs; k++) {
+            const v = k / segs;
+            const ang = Math.atan2(A.y + (B.y - A.y) * v, A.x + (B.x - A.x) * v);
+            topConePts.push([R_CONE_TOP * Math.cos(ang), R_CONE_TOP * Math.sin(ang), H]);
+          }
+        }
+        pushPolylineEdge(topConePts, true);
+
+        // ---------------------------------------------------------------------
+        // C. ПЯТЬ БОКОВЫХ ГРАНЕЙ ПРИЗМЫ (с точным вырезом трапеции «К»)
+        // ---------------------------------------------------------------------
+        // C1. Правая боковая V1-V2 и левая боковая V3-V4 (целые прямоугольники)
+        [[PENT[1], PENT[2]], [PENT[3], PENT[4]]].forEach(([A, B]) => {
+          const nOut = vNorm([B.y - A.y, -(B.x - A.x), 0]);
+          // Проверяем направление наружу (от центра (0,0))
+          const mid = [(A.x + B.x) * 0.5, (A.y + B.y) * 0.5, 0];
+          const nh = vDot(nOut, mid) > 0 ? nOut : [-nOut[0], -nOut[1], 0];
+          pushQuadGrid((u, v) => [
+            A.x + (B.x - A.x) * u,
+            A.y + (B.y - A.y) * u,
+            v * H
+          ], 6, 8, nh, 'prism');
+          edges.push([[A.x, A.y, 0], [A.x, A.y, H]]);
+          edges.push([[B.x, B.y, 0], [B.x, B.y, H]]);
+        });
+
+        // C2. Задняя грань V3-V2 (Y = Y_BACK, X ∈ [-X_V2, +X_V2]) с вырезом «К»
+        // Верхняя полоса Z ∈ [95, 120]
+        pushQuadGrid((u, v) => [-X_V2 + 2 * X_V2 * u, Y_BACK, Z_TOP + (H - Z_TOP) * v], 8, 2, [0, 1, 0], 'prism');
+        // Нижняя полоса Z ∈ [0, 35]
+        pushQuadGrid((u, v) => [-X_V2 + 2 * X_V2 * u, Y_BACK, Z_BOT * v], 8, 3, [0, 1, 0], 'prism');
+        // Левая средняя зона: X от -X_V2 до -K_SLOPE*Z
+        pushQuadGrid((u, v) => {
+          const z = Z_BOT + (Z_TOP - Z_BOT) * v;
+          const xMax = -K_SLOPE * z;
+          return [-X_V2 + (xMax + X_V2) * u, Y_BACK, z];
+        }, 4, 6, [0, 1, 0], 'prism');
+        // Правая средняя зона: X от +K_SLOPE*Z до +X_V2
+        pushQuadGrid((u, v) => {
+          const z = Z_BOT + (Z_TOP - Z_BOT) * v;
+          const xMin = K_SLOPE * z;
+          return [xMin + (X_V2 - xMin) * u, Y_BACK, z];
+        }, 4, 6, [0, 1, 0], 'prism');
+        // Контур проема «К» на задней грани
+        pushPolylineEdge([
+          [-X_K_TOP, Y_BACK, Z_TOP],
+          [+X_K_TOP, Y_BACK, Z_TOP],
+          [+X_K_BOT, Y_BACK, Z_BOT],
+          [-X_K_BOT, Y_BACK, Z_BOT]
+        ], true);
+
+        // C3. Передние грани V0-V1 (sgn=+1) и V0-V4 (sgn=-1) с вырезом «К»
+        [-1, 1].forEach((sgn) => {
+          const nFront = vNorm([sgn * TAN36, -1, 0]);
+          // Верхняя полоса Z ∈ [95, 120]
+          pushQuadGrid((u, v) => {
+            const ax = X_V1 * u;
+            return [sgn * ax, yFrontPrism(ax), Z_TOP + (H - Z_TOP) * v];
+          }, 8, 2, nFront, 'prism');
+          // Нижняя полоса Z ∈ [0, 35]
+          pushQuadGrid((u, v) => {
+            const ax = X_V1 * u;
+            return [sgn * ax, yFrontPrism(ax), Z_BOT * v];
+          }, 8, 3, nFront, 'prism');
+          // Внешняя средняя зона Z ∈ [35, 95], |X| от K_SLOPE*Z до X_V1
+          pushQuadGrid((u, v) => {
+            const z = Z_BOT + (Z_TOP - Z_BOT) * v;
+            const xMin = K_SLOPE * z;
+            const ax = xMin + (X_V1 - xMin) * u;
+            return [sgn * ax, yFrontPrism(ax), z];
+          }, 5, 6, nFront, 'prism');
+
+          // Ребра проема «К» на передней грани
+          edges.push([[0, -R_PRISM, Z_TOP], [sgn * X_K_TOP, Y_K95_FRONT, Z_TOP]]);
+          edges.push([[sgn * X_K_TOP, Y_K95_FRONT, Z_TOP], [sgn * X_K_BOT, Y_K35_FRONT, Z_BOT]]);
+          edges.push([[sgn * X_K_BOT, Y_K35_FRONT, Z_BOT], [0, -R_PRISM, Z_BOT]]);
+        });
+        // Переднее ребро V0 с разрывом на Z ∈ (35, 95)
+        edges.push([[0, -R_PRISM, H], [0, -R_PRISM, Z_TOP]]);
+        edges.push([[0, -R_PRISM, Z_BOT], [0, -R_PRISM, 0]]);
+
+        // ---------------------------------------------------------------------
+        // D. ВНУТРЕННЯЯ КОНИЧЕСКАЯ ПОЛОСТЬ r(Z) = Z / 3
+        // ---------------------------------------------------------------------
+        function addConeBand(z0, z1, a0, a1, nZ, nA) {
+          for (let i = 0; i < nA; i++) {
+            const t0 = a0 + (a1 - a0) * (i / nA);
+            const t1 = a0 + (a1 - a0) * ((i + 1) / nA);
+            const tm = (t0 + t1) * 0.5;
+            // Нормаль внутрь конуса: (-cos, -sin, 1/3)
+            const nh = vNorm([-Math.cos(tm), -Math.sin(tm), 1 / 3]);
+            for (let j = 0; j < nZ; j++) {
+              const za = z0 + (z1 - z0) * (j / nZ);
+              const zb = z0 + (z1 - z0) * ((j + 1) / nZ);
+              const ra = rCone(za), rb = rCone(zb);
+              const p00 = [ra * Math.cos(t0), ra * Math.sin(t0), za];
+              const p10 = [ra * Math.cos(t1), ra * Math.sin(t1), za];
+              const p11 = [rb * Math.cos(t1), rb * Math.sin(t1), zb];
+              const p01 = [rb * Math.cos(t0), rb * Math.sin(t0), zb];
+              if (za > 1e-4) pushTri(p00, p10, p11, nh, 'cone');
+              pushTri(p00, p11, p01, nh, 'cone');
+            }
+          }
+        }
+
+        // Верхний пояс 95..120 (полный круг)
+        addConeBand(Z_TOP, H, 0, Math.PI * 2, 3, 48);
+        // Нижний конус 0..35 (полный круг)
+        addConeBand(0, Z_BOT, 0, Math.PI * 2, 4, 40);
+        // Средний пояс 35..95: правый сектор [-PHI0, +PHI0] и левый [PI-PHI0, PI+PHI0]
+        addConeBand(Z_BOT, Z_TOP, -PHI0, +PHI0, 6, 16);
+        addConeBand(Z_BOT, Z_TOP, Math.PI - PHI0, Math.PI + PHI0, 6, 16);
+
+        // Дуги врезки на конусе при Z = 95 и Z = 35 (передняя и задняя)
+        [
+          { z: Z_TOP, r: R95, a0: PHI0, a1: Math.PI - PHI0 },
+          { z: Z_TOP, r: R95, a0: -Math.PI + PHI0, a1: -PHI0 },
+          { z: Z_BOT, r: R35, a0: PHI0, a1: Math.PI - PHI0 },
+          { z: Z_BOT, r: R35, a0: -Math.PI + PHI0, a1: -PHI0 }
+        ].forEach(({ z, r, a0, a1 }) => {
+          const arcPts = [];
+          const n = 20;
+          for (let i = 0; i <= n; i++) {
+            const a = a0 + (a1 - a0) * (i / n);
+            arcPts.push([r * Math.cos(a), r * Math.sin(a), z]);
+          }
+          pushPolylineEdge(arcPts, false);
+        });
+
+        // 4 прямые образующие врезки на конусе
+        [[-1, 1], [1, 1], [-1, -1], [1, -1]].forEach(([sx, sy]) => {
+          edges.push([
+            [sx * X_K_TOP, sy * Y_K95_CONE, Z_TOP],
+            [sx * X_K_BOT, sy * Y_K35_CONE, Z_BOT]
+          ]);
+        });
+
+        // ---------------------------------------------------------------------
+        // E. 4 ПЛОСКИЕ ГРАНИ ВЫРЕЗА «К» (верхняя, нижняя, правая и левая стенки)
+        // ---------------------------------------------------------------------
+        // E1. Верхняя полка Z = 95 (нормаль вниз: 0, 0, -1)
+        pushQuadGrid((u, v) => {
+          const x = -X_K_TOP + 2 * X_K_TOP * u;
+          const yc = Math.sqrt(Math.max(0, R95 * R95 - x * x));
+          return [x, yc + (Y_BACK - yc) * v, Z_TOP];
+        }, 12, 3, [0, 0, -1], 'cutK');
+        // Передняя часть верхней полки (раздельно левая и правая из-за излома на X = 0!)
+        [-1, 1].forEach((sgn) => {
+          pushQuadGrid((u, v) => {
+            const ax = X_K_TOP * u;
+            const yc = -Math.sqrt(Math.max(0, R95 * R95 - ax * ax));
+            const yf = yFrontPrism(ax);
+            return [sgn * ax, yf + (yc - yf) * v, Z_TOP];
+          }, 8, 3, [0, 0, -1], 'cutK');
+        });
+
+        // E2. Нижняя полка Z = 35 (нормаль вверх: 0, 0, +1)
+        pushQuadGrid((u, v) => {
+          const x = -X_K_BOT + 2 * X_K_BOT * u;
+          const yc = Math.sqrt(Math.max(0, R35 * R35 - x * x));
+          return [x, yc + (Y_BACK - yc) * v, Z_BOT];
+        }, 8, 4, [0, 0, 1], 'cutK');
+        [-1, 1].forEach((sgn) => {
+          pushQuadGrid((u, v) => {
+            const ax = X_K_BOT * u;
+            const yc = -Math.sqrt(Math.max(0, R35 * R35 - ax * ax));
+            const yf = yFrontPrism(ax);
+            return [sgn * ax, yf + (yc - yf) * v, Z_BOT];
+          }, 6, 4, [0, 0, 1], 'cutK');
+        });
+
+        // E3. Наклонные боковые стенки «К» (X = ±K_SLOPE*Z, Z ∈ [35, 95])
+        [-1, 1].forEach((sgn) => {
+          const nWall = vNorm([-sgn, 0, K_SLOPE]);
+          // Задняя часть (Y > 0)
+          pushQuadGrid((u, v) => {
+            const z = Z_BOT + (Z_TOP - Z_BOT) * v;
+            const yc = Y_CONE_SLOPE * z;
+            return [sgn * K_SLOPE * z, yc + (Y_BACK - yc) * u, z];
+          }, 4, 6, nWall, 'cutK');
+          // Передняя часть (Y < 0)
+          pushQuadGrid((u, v) => {
+            const z = Z_BOT + (Z_TOP - Z_BOT) * v;
+            const yc = -Y_CONE_SLOPE * z;
+            const yf = yFrontPrism(K_SLOPE * z);
+            return [sgn * K_SLOPE * z, yf + (yc - yf) * u, z];
+          }, 4, 6, nWall, 'cutK');
+
+          // Ребра сопряжения стенок «К» с полками
+          edges.push([[sgn * X_K_TOP, Y_K95_CONE, Z_TOP], [sgn * X_K_TOP, Y_BACK, Z_TOP]]);
+          edges.push([[sgn * X_K_TOP, -Y_K95_CONE, Z_TOP], [sgn * X_K_TOP, Y_K95_FRONT, Z_TOP]]);
+          edges.push([[sgn * X_K_BOT, Y_K35_CONE, Z_BOT], [sgn * X_K_BOT, Y_BACK, Z_BOT]]);
+          edges.push([[sgn * X_K_BOT, -Y_K35_CONE, Z_BOT], [sgn * X_K_BOT, Y_K35_FRONT, Z_BOT]]);
+        });
+
+        return { tris, edges };
+      }
+
+      // Sutherland-Hodgman отсечение многоугольника полупространством f(p) >= 0
+      function clipPolyByHalfspace(poly, f) {
+        const out = [];
+        const n = poly.length;
+        for (let i = 0; i < n; i++) {
+          const a = poly[i];
+          const b = poly[(i + 1) % n];
+          const fa = f(a);
+          const fb = f(b);
+          const inA = fa >= -1e-6;
+          const inB = fb >= -1e-6;
+          if (inA && inB) {
+            out.push(b);
+          } else if (inA && !inB) {
+            const t = fa / (fa - fb);
+            out.push(vLerp(a, b, t));
+          } else if (!inA && inB) {
+            const t = fa / (fa - fb);
+            out.push(vLerp(a, b, t));
+            out.push(b);
+          }
+        }
+        return out;
+      }
+
+      // Отсечение отрезка полупространством f(p) >= 0
+      function clipEdgeByHalfspace(a, b, f) {
+        const fa = f(a), fb = f(b);
+        if (fa < -1e-6 && fb < -1e-6) return null;
+        if (fa >= -1e-6 && fb >= -1e-6) return [a, b];
+        const t = fa / (fa - fb);
+        const m = vLerp(a, b, t);
+        return fa >= -1e-6 ? [a, m] : [m, b];
+      }
+
+      // Генерация плоской крышки разреза + 3D-штриховки под 45° по ГОСТ
+      function makeSectionCap(quadPts, normal, planeType) {
+        const capTris = [];
+        const capEdges = [];
+        const hatchLines = [];
+
+        // Разбиваем выпуклый четырехугольник крышки на мелкую сетку 4x4 для чистого Z-буфера
+        const [p0, p1, p2, p3] = quadPts;
+        const nu = 4, nv = 4;
+        for (let i = 0; i < nu; i++) {
+          const u0 = i / nu, u1 = (i + 1) / nu;
+          for (let j = 0; j < nv; j++) {
+            const v0 = j / nv, v1 = (j + 1) / nv;
+            const bilerp = (u, v) => {
+              const bot = vLerp(p0, p1, u);
+              const top = vLerp(p3, p2, u);
+              return vLerp(bot, top, v);
+            };
+            const a = bilerp(u0, v0), b = bilerp(u1, v0), c = bilerp(u1, v1), d = bilerp(u0, v1);
+            capTris.push({ v: [a, b, c], n: normal, mat: 'cap' });
+            capTris.push({ v: [a, c, d], n: normal, mat: 'cap' });
+          }
+        }
+
+        // Контур крышки
+        for (let i = 0; i < 4; i++) {
+          capEdges.push([quadPts[i], quadPts[(i + 1) % 4]]);
+        }
+
+        // 3D-штриховка под 45° внутри 2D-контура крышки
+        // Проецируем quadPts в 2D (u, z): для planeType='X0' (u=Y, v=Z), для 'Y0' (u=X, v=Z)
+        const to2D = (p) => (planeType === 'X0' ? [p[1], p[2]] : [p[0], p[2]]);
+        const from2D = (u, z) => (planeType === 'X0' ? [0, u, z] : [u, 0, z]);
+        const poly2 = quadPts.map(to2D);
+
+        // Определяем ориентацию 2D-полигона для отсечения штриховых линий (u - z = const)
+        const step = 6.5;
+        let minC = Infinity, maxC = -Infinity;
+        poly2.forEach(([u, z]) => {
+          const val = u - z;
+          if (val < minC) minC = val;
+          if (val > maxC) maxC = val;
+        });
+
+        for (let cVal = Math.ceil(minC / step) * step; cVal < maxC; cVal += step) {
+          // Ищем пересечения прямой u - z = cVal с ребрами 2D-многоугольника
+          const hits = [];
+          for (let i = 0; i < poly2.length; i++) {
+            const [u1, z1] = poly2[i];
+            const [u2, z2] = poly2[(i + 1) % poly2.length];
+            const d1 = (u1 - z1) - cVal;
+            const d2 = (u2 - z2) - cVal;
+            if ((d1 <= 0 && d2 > 0) || (d2 <= 0 && d1 > 0)) {
+              const t = d1 / (d1 - d2);
+              hits.push([u1 + (u2 - u1) * t, z1 + (z2 - z1) * t]);
+            }
+          }
+          if (hits.length >= 2) {
+            hits.sort((a, b) => a[1] - b[1]);
+            // Небольшой сдвиг вдоль нормали (0.08 мм), чтобы штриховка не мерцала
+            const eps = 0.08;
+            const A = from2D(hits[0][0], hits[0][1]);
+            const B = from2D(hits[1][0], hits[1][1]);
+            hatchLines.push([
+              [A[0] + normal[0] * eps, A[1] + normal[1] * eps, A[2] + normal[2] * eps],
+              [B[0] + normal[0] * eps, B[1] + normal[1] * eps, B[2] + normal[2] * eps]
+            ]);
+          }
+        }
+
+        return { capTris, capEdges, hatchLines };
+      }
+
+      // Кэш 3D-геометрии для всех 4 режимов разрезов
+      const BASE_BREP = buildFullBRep();
+      const SECTION_CACHE = {};
+
+      function getSectionMesh(mode) {
+        if (SECTION_CACHE[mode]) return SECTION_CACHE[mode];
+
+        const tris = [];
+        const edges = [];
+        const hatchLines = [];
+
+        function emitClippedPoly(poly, n, mat) {
+          for (let i = 1; i < poly.length - 1; i++) {
+            tris.push({ v: [poly[0], poly[i], poly[i + 1]], n, mat });
+          }
+        }
+
+        if (mode === 'full') {
+          SECTION_CACHE[mode] = { tris: BASE_BREP.tris, edges: BASE_BREP.edges, hatchLines: [] };
+          return SECTION_CACHE[mode];
+        }
+
+        if (mode === 'profile') {
+          // Оставляем X >= 0 (отсечена левая половина X < 0)
+          BASE_BREP.tris.forEach((t) => {
+            const p = clipPolyByHalfspace(t.v, (v) => v[0]);
+            if (p.length >= 3) emitClippedPoly(p, t.n, t.mat);
+          });
+          BASE_BREP.edges.forEach(([a, b]) => {
+            const e = clipEdgeByHalfspace(a, b, (v) => v[0]);
+            if (e) edges.push(e);
+          });
+          // 4 крышки на X = 0 (нормаль -X)
+          const caps = [
+            makeSectionCap([[0, Y_BACK, Z_TOP], [0, R95, Z_TOP], [0, R_CONE_TOP, H], [0, Y_BACK, H]], [-1, 0, 0], 'X0'),
+            makeSectionCap([[0, -R95, Z_TOP], [0, -R_PRISM, Z_TOP], [0, -R_PRISM, H], [0, -R_CONE_TOP, H]], [-1, 0, 0], 'X0'),
+            makeSectionCap([[0, Y_BACK, 0], [0, 0, 0], [0, R35, Z_BOT], [0, Y_BACK, Z_BOT]], [-1, 0, 0], 'X0'),
+            makeSectionCap([[0, 0, 0], [0, -R_PRISM, 0], [0, -R_PRISM, Z_BOT], [0, -R35, Z_BOT]], [-1, 0, 0], 'X0')
+          ];
+          caps.forEach((c) => {
+            tris.push(...c.capTris);
+            edges.push(...c.capEdges);
+            hatchLines.push(...c.hatchLines);
+          });
+        } else if (mode === 'frontal') {
+          // Оставляем Y >= 0 (отсечена передняя половина Y < 0)
+          BASE_BREP.tris.forEach((t) => {
+            const p = clipPolyByHalfspace(t.v, (v) => v[1]);
+            if (p.length >= 3) emitClippedPoly(p, t.n, t.mat);
+          });
+          BASE_BREP.edges.forEach(([a, b]) => {
+            const e = clipEdgeByHalfspace(a, b, (v) => v[1]);
+            if (e) edges.push(e);
+          });
+          // 2 крышки на Y = 0 (левая и правая трапеции до ±X_SEC, нормаль -Y)
+          const caps = [
+            makeSectionCap([[0, 0, 0], [X_SEC, 0, 0], [X_SEC, 0, H], [R_CONE_TOP, 0, H]], [0, -1, 0], 'Y0'),
+            makeSectionCap([[-X_SEC, 0, 0], [0, 0, 0], [-R_CONE_TOP, 0, H], [-X_SEC, 0, H]], [0, -1, 0], 'Y0')
+          ];
+          caps.forEach((c) => {
+            tris.push(...c.capTris);
+            edges.push(...c.capEdges);
+            hatchLines.push(...c.hatchLines);
+          });
+        } else if (mode === 'quarter') {
+          // Вырезаем передне-правую четверть (X > 0 && Y < 0):
+          // Каждый треугольник разбиваем на (X <= 0) + (X >= 0 && Y >= 0)
+          BASE_BREP.tris.forEach((t) => {
+            const leftPart = clipPolyByHalfspace(t.v, (v) => -v[0]);
+            if (leftPart.length >= 3) emitClippedPoly(leftPart, t.n, t.mat);
+            const rightPart = clipPolyByHalfspace(t.v, (v) => v[0]);
+            if (rightPart.length >= 3) {
+              const rightBack = clipPolyByHalfspace(rightPart, (v) => v[1]);
+              if (rightBack.length >= 3) emitClippedPoly(rightBack, t.n, t.mat);
+            }
+          });
+          BASE_BREP.edges.forEach(([a, b]) => {
+            const eL = clipEdgeByHalfspace(a, b, (v) => -v[0]);
+            if (eL) edges.push(eL);
+            const eR = clipEdgeByHalfspace(a, b, (v) => v[0]);
+            if (eR) {
+              const eRB = clipEdgeByHalfspace(eR[0], eR[1], (v) => v[1]);
+              if (eRB) edges.push(eRB);
+            }
+          });
+          // Крышка фронтального разреза на Y = 0, X >= 0 (нормаль -Y)
+          // И 2 передние крышки профильного разреза на X = 0, Y <= 0 (нормаль +X)
+          const caps = [
+            makeSectionCap([[0, 0, 0], [X_SEC, 0, 0], [X_SEC, 0, H], [R_CONE_TOP, 0, H]], [0, -1, 0], 'Y0'),
+            makeSectionCap([[0, -R95, Z_TOP], [0, -R_PRISM, Z_TOP], [0, -R_PRISM, H], [0, -R_CONE_TOP, H]], [1, 0, 0], 'X0'),
+            makeSectionCap([[0, 0, 0], [0, -R_PRISM, 0], [0, -R_PRISM, Z_BOT], [0, -R35, Z_BOT]], [1, 0, 0], 'X0')
+          ];
+          caps.forEach((c) => {
+            tris.push(...c.capTris);
+            edges.push(...c.capEdges);
+            hatchLines.push(...c.hatchLines);
+          });
+        }
+
+        SECTION_CACHE[mode] = { tris, edges, hatchLines };
+        return SECTION_CACHE[mode];
+      }
+
+      // Цветовые палитры 3D-стилей
+      const PALETTES = {
+        edu: {
+          prism: [96, 165, 250],   // #60a5fa синий
+          cone:  [251, 191, 36],   // #fbbf24 янтарный
+          cutK:  [52, 211, 153],   // #34d399 изумрудный
+          cap:   [248, 113, 113],  // #f87171 розовый
+          edge:  'rgba(15, 23, 42, 0.72)',
+          hatch: 'rgba(127, 29, 29, 0.78)'
+        },
+        kompas: {
+          prism: [184, 196, 208],  // Стальной металлик КОМПАС-3D
+          cone:  [154, 168, 184],
+          cutK:  [198, 209, 220],
+          cap:   [218, 226, 235],
+          edge:  'rgba(15, 23, 42, 0.85)',
+          hatch: 'rgba(30, 41, 59, 0.75)'
+        }
+      };
+
+      // Матрица поворота камеры (центрируем деталь по Z = 60 мм)
+      function transform3D(p, cy, sy, cp, sp) {
+        // Центрируем высоту на Z = 60
+        const x = p[0];
+        const y = p[1];
+        const z = p[2] - 60.0;
+        // Вращение вокруг Z (yaw): при yaw = 0 смотрим строго спереди (-Y -> к камере)
+        const rx = x * cy - y * sy;
+        const ry = x * sy + y * cy;
+        // Наклон вокруг X (pitch): экранный X = rx, экранный Y = вверх (z*cp + ry*sp), глубина = -ry*cp + z*sp
+        const screenX = rx;
+        const screenY = z * cp + ry * sp;
+        const depth = -ry * cp + z * sp;
+        return [screenX, screenY, depth];
+      }
+
+      function transformNormal(n, cy, sy, cp, sp) {
+        const rx = n[0] * cy - n[1] * sy;
+        const ry = n[0] * sy + n[1] * cy;
+        return [rx, n[2] * cp + ry * sp, -ry * cp + n[2] * sp];
+      }
+
+      function draw3D() {
+        const ctx = ctx3;
+        ctx.save();
+        ctx.setTransform(DPR3, 0, 0, DPR3, 0, 0);
+        ctx.clearRect(0, 0, W3, H3);
+
+        // СТРОГАЯ ФОРМУЛА МАСШТАБА ДЛЯ МОБИЛЬНЫХ ЭКРАНОВ:
+        // scale = (Math.min(W, H) / 185) * zoomFactor
+        const scale = (Math.min(W3, H3) / 185) * state.zoom3d;
+        const cx = W3 * 0.5;
+        const cyScr = H3 * 0.52;
+
+        const cy = Math.cos(state.yaw), sy = Math.sin(state.yaw);
+        const cp = Math.cos(state.pitch), sp = Math.sin(state.pitch);
+
+        const toScreen = (pt) => {
+          const t = transform3D(pt, cy, sy, cp, sp);
+          return [cx + t[0] * scale, cyScr - t[1] * scale, t[2]];
+        };
+
+        const pal = PALETTES[state.cadStyle];
+        const mesh = getSectionMesh(state.secMode);
+
+        // Два студийных источника света в пространстве камеры
+        const L1 = vNorm([0.45, 0.65, 0.62]);
+        const L2 = vNorm([-0.6, -0.25, 0.75]);
+        const V = [0, 0, 1];
+        const H1 = vNorm([L1[0] + V[0], L1[1] + V[1], L1[2] + V[2]]);
+
+        // Подготовка и сортировка всех 3D-примитивов (Painter's algorithm)
+        const items = [];
+
+        // Треугольники граней
+        for (let i = 0; i < mesh.tris.length; i++) {
+          const tri = mesh.tris[i];
+          const p0 = toScreen(tri.v[0]);
+          const p1 = toScreen(tri.v[1]);
+          const p2 = toScreen(tri.v[2]);
+          const nc = transformNormal(tri.n, cy, sy, cp, sp);
+
+          // Двустороннее студийное освещение по Фонгу (нормаль ориентируем на камеру)
+          const nView = nc[2] >= 0 ? nc : [-nc[0], -nc[1], -nc[2]];
+          const diff1 = Math.max(0, vDot(nView, L1));
+          const diff2 = Math.max(0, vDot(nView, L2));
+          const spec = Math.pow(Math.max(0, vDot(nView, H1)), state.cadStyle === 'kompas' ? 32 : 20);
+          const amb = 0.34;
+          const intensity = Math.min(1.18, amb + diff1 * 0.56 + diff2 * 0.24);
+          const specAdd = spec * (state.cadStyle === 'kompas' ? 58 : 38);
+
+          const base = pal[tri.mat];
+          const r = Math.min(255, Math.round(base[0] * intensity + specAdd));
+          const g = Math.min(255, Math.round(base[1] * intensity + specAdd));
+          const b = Math.min(255, Math.round(base[2] * intensity + specAdd));
+
+          const zAvg = (p0[2] + p1[2] + p2[2]) / 3;
+          items.push({
+            type: 0,
+            z: zAvg,
+            p0, p1, p2,
+            fill: `rgb(${r},${g},${b})`
+          });
+        }
+
+        // Ребра B-Rep (слегка выносим по глубине +0.9 мм, чтобы чётко ложились поверх граней)
+        for (let i = 0; i < mesh.edges.length; i++) {
+          const [A, B] = mesh.edges[i];
+          const p0 = toScreen(A);
+          const p1 = toScreen(B);
+          items.push({
+            type: 1,
+            z: (p0[2] + p1[2]) * 0.5 + 1.1,
+            p0, p1,
+            stroke: pal.edge,
+            lw: 1.25
+          });
+        }
+
+        // 3D-штриховка на крышках разрезов
+        for (let i = 0; i < mesh.hatchLines.length; i++) {
+          const [A, B] = mesh.hatchLines[i];
+          const p0 = toScreen(A);
+          const p1 = toScreen(B);
+          items.push({
+            type: 1,
+            z: (p0[2] + p1[2]) * 0.5 + 1.4,
+            p0, p1,
+            stroke: pal.hatch,
+            lw: 0.95
+          });
+        }
+
+        // Сортировка от дальних к ближним (меньший z рисуется первым)
+        items.sort((a, b) => a.z - b.z);
+
+        // Отрисовка всех отсортированных элементов
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        for (let i = 0; i < items.length; i++) {
+          const it = items[i];
+          if (it.type === 0) {
+            ctx.fillStyle = it.fill;
+            ctx.strokeStyle = it.fill; // Устраняет микрощели между соседними треугольниками
+            ctx.lineWidth = 0.55;
+            ctx.beginPath();
+            ctx.moveTo(it.p0[0], it.p0[1]);
+            ctx.lineTo(it.p1[0], it.p1[1]);
+            ctx.lineTo(it.p2[0], it.p2[1]);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+          } else {
+            ctx.strokeStyle = it.stroke;
+            ctx.lineWidth = it.lw;
+            ctx.beginPath();
+            ctx.moveTo(it.p0[0], it.p0[1]);
+            ctx.lineTo(it.p1[0], it.p1[1]);
+            ctx.stroke();
+          }
+        }
+
+        // 3D-ОСИ X, Y, Z И МАРКЕРЫ ТОЧЕК (поверх модели для учебной наглядности)
+        if (state.show3dAxes) {
+          const orig = toScreen([0, 0, 0]);
+          const axes = [
+            { end: [76, 0, 0], lbl: '+X', col: '#ef4444' },
+            { end: [0, 74, 0], lbl: '+Y (зад)', col: '#10b981' },
+            { end: [0, 0, 140], lbl: '+Z', col: '#2563eb' }
+          ];
+          axes.forEach(({ end, lbl, col }) => {
+            const pe = toScreen(end);
+            ctx.save();
+            ctx.strokeStyle = col;
+            ctx.fillStyle = col;
+            ctx.lineWidth = 2.0;
+            ctx.setLineDash([5, 3]);
+            ctx.beginPath();
+            ctx.moveTo(orig[0], orig[1]);
+            ctx.lineTo(pe[0], pe[1]);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            drawArrow(ctx, pe[0], pe[1], pe[0] - orig[0], pe[1] - orig[1], col, 9);
+            ctx.font = '800 12px ' + getComputedStyle(document.body).fontFamily;
+            ctx.fillText(lbl, pe[0] + 6, pe[1] - 4);
+            ctx.restore();
+          });
+
+          // Если в «Циркуле РК-1» выбрана конкретная точка, подсвечиваем её и в 3D!
+          if (typeof state.compassMode === 'number') {
+            const pt = KEY_POINTS_3D[state.compassMode];
+            const ps = toScreen([pt.X, pt.Y, pt.Z]);
+            ctx.save();
+            ctx.fillStyle = '#7c3aed';
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 2.2;
+            ctx.beginPath();
+            ctx.arc(ps[0], ps[1], 6, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+            ctx.font = '800 12px ' + getComputedStyle(document.body).fontFamily;
+            ctx.fillStyle = '#5b21b6';
+            ctx.fillText(pt.id, ps[0] + 9, ps[1] - 6);
+            ctx.restore();
+          }
+        }
+
+        ctx.restore();
+      }
+
+      function resize3D() {
+        const rect = stage3d.getBoundingClientRect();
+        if (rect.width < 10 || rect.height < 10) return;
+        DPR3 = Math.min(window.devicePixelRatio || 1, 2.5);
+        W3 = rect.width;
+        H3 = rect.height;
+        canvas3d.width = Math.round(W3 * DPR3);
+        canvas3d.height = Math.round(H3 * DPR3);
+        draw3D();
+      }
+
+      // Интерактивность 3D: вращение мышью/пальцем, зум колесом/щипком
+      let drag3d = null;
+      let pinch3dDist = null;
+
+      canvas3d.addEventListener('mousedown', (e) => {
+        drag3d = { x: e.clientX, y: e.clientY, yaw: state.yaw, pitch: state.pitch };
+      });
+      window.addEventListener('mousemove', (e) => {
+        if (!drag3d) return;
+        state.yaw = drag3d.yaw + (e.clientX - drag3d.x) * 0.0085;
+        state.pitch = Math.max(-1.45, Math.min(1.45, drag3d.pitch + (e.clientY - drag3d.y) * 0.0085));
+        draw3D();
+      });
+      window.addEventListener('mouseup', () => { drag3d = null; });
+      canvas3d.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const factor = e.deltaY < 0 ? 1.1 : 0.91;
+        state.zoom3d = Math.max(0.55, Math.min(2.6, state.zoom3d * factor));
+        draw3D();
+      }, { passive: false });
+
+      canvas3d.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 1) {
+          const t = e.touches[0];
+          drag3d = { x: t.clientX, y: t.clientY, yaw: state.yaw, pitch: state.pitch };
+          pinch3dDist = null;
+        } else if (e.touches.length === 2) {
+          drag3d = null;
+          pinch3dDist = Math.hypot(
+            e.touches[0].clientX - e.touches[1].clientX,
+            e.touches[0].clientY - e.touches[1].clientY
+          );
+        }
+      }, { passive: true });
+      canvas3d.addEventListener('touchmove', (e) => {
+        if (e.touches.length === 1 && drag3d) {
+          const t = e.touches[0];
+          state.yaw = drag3d.yaw + (t.clientX - drag3d.x) * 0.0095;
+          state.pitch = Math.max(-1.45, Math.min(1.45, drag3d.pitch + (t.clientY - drag3d.y) * 0.0095));
+          draw3D();
+        } else if (e.touches.length === 2 && pinch3dDist) {
+          const d = Math.hypot(
+            e.touches[0].clientX - e.touches[1].clientX,
+            e.touches[0].clientY - e.touches[1].clientY
+          );
+          state.zoom3d = Math.max(0.55, Math.min(2.6, state.zoom3d * (d / pinch3dDist)));
+          pinch3dDist = d;
+          draw3D();
+        }
+      }, { passive: true });
+      canvas3d.addEventListener('touchend', () => { drag3d = null; pinch3dDist = null; });
+
+      // Кнопки управления 3D-сценой
+      document.querySelectorAll('[data-sec]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          state.secMode = btn.dataset.sec;
+          document.querySelectorAll('[data-sec]').forEach((b) => b.classList.toggle('active', b === btn));
+          // Удобно слегка развернуть камеру для профильного разреза
+          if (state.secMode === 'profile') { state.yaw = -1.12; state.pitch = 0.28; }
+          else if (state.secMode === 'frontal') { state.yaw = -0.25; state.pitch = 0.30; }
+          else if (state.secMode === 'quarter') { state.yaw = -0.58; state.pitch = 0.38; }
+          draw3D();
+        });
+      });
+
+      document.querySelectorAll('[data-style]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          state.cadStyle = btn.dataset.style;
+          document.querySelectorAll('[data-style]').forEach((b) => b.classList.toggle('active', b === btn));
+          stage3d.classList.toggle('kompas-bg', state.cadStyle === 'kompas');
+          legend3dEl.style.display = state.cadStyle === 'edu' ? 'flex' : 'none';
+          draw3D();
+        });
+      });
+
+      document.querySelectorAll('[data-cam]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const c = btn.dataset.cam;
+          if (c === 'iso') { state.yaw = -0.62; state.pitch = 0.42; }
+          else if (c === 'p2') { state.yaw = 0; state.pitch = 0; }
+          else if (c === 'p1') { state.yaw = 0; state.pitch = 1.44; }
+          else if (c === 'p3') { state.yaw = -Math.PI * 0.5; state.pitch = 0; }
+          draw3D();
+        });
+      });
+
+      document.getElementById('chk3dAxes').addEventListener('change', (e) => { state.show3dAxes = e.target.checked; draw3D(); });
+      document.getElementById('btn3dZoomIn').addEventListener('click', () => { state.zoom3d = Math.min(2.6, state.zoom3d * 1.18); draw3D(); });
+      document.getElementById('btn3dZoomOut').addEventListener('click', () => { state.zoom3d = Math.max(0.55, state.zoom3d / 1.18); draw3D(); });
+      document.getElementById('btn3dReset').addEventListener('click', () => {
+        state.yaw = -0.62; state.pitch = 0.42; state.zoom3d = 1.0; draw3D();
+      });
+
+      /* =======================================================================
+         8. ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ И ИЗМЕНЕНИИ РАЗМЕРА ОКНА
+         ======================================================================= */
+      window.addEventListener('resize', () => {
+        if (state.activeTab === 'tab2d') resize2D();
+        if (state.activeTab === 'tab3d') resize3D();
+      });
+
+      window.addEventListener('load', () => {
+        setCompassMode('all');
+        resize2D();
+      });
+    })();
+  </script>
+</body>
+</html>
